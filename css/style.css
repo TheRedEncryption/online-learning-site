@@ -1,10 +1,40 @@
 body{
     font-family: 'Trebuchet MS', sans-serif;
+    margin: 0px;
+    margin-top: 10vh;
+}
+
+.largeSection{
+    height:70vh;
+    display:flex;
+    align-items: center;
+    text-align: center;
+    padding: 10vh 20vw;
+    background-color: brown;
+}
+
+.white{
+    color:white;
+}
+
+.bold{
+    font-weight: bolder;
+}
+
+.sticky{
+    position: fixed;
+    top: 0;
+    width: 100%
+}
+
+.buttons{
+    padding:1em;
 }
 
 .header{
     width:100%;
-    background-color:red;
+    height:10vh;
+    background-color:#980000ff;
     display:flex;
     align-content: center;
     justify-content: center;
@@ -12,5 +42,12 @@ body{
 }
 
 button{
-    border-radius: 1em;
+    border-radius: 3em;
+    padding:1em;
+    border: 0px;
+    cursor: pointer;
+}
+
+button:hover{
+    background-color: gray;
 }
