@@ -13,3 +13,7 @@ add functions here for generating:
  - footer div
  - other divs that require multiple child DOMs
 */
+
+function populateHeader() {
+    
+}
