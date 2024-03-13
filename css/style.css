@@ -1,4 +1,16 @@
+body{
+    font-family: 'Trebuchet MS', sans-serif;
+}
+
 .header{
     width:100%;
     background-color:red;
+    display:flex;
+    align-content: center;
+    justify-content: center;
+    align-items:center;
+}
+
+button{
+    border-radius: 1em;
 }
