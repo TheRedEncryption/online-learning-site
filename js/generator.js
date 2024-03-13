@@ -4,7 +4,7 @@ document.addEventListener('DOMContentLoaded', initialize, false);
 
 function initialize() {
     // init stuff goes here
-    window.alert("Yeah!");
+    // window.alert("Yeah!");
 }
 
 /*
