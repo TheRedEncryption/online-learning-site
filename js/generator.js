@@ -52,5 +52,12 @@ function imagehref() {
     let tab = findElementWithAttribute("data-imagehref")
     tab.forEach(function(htmlElement){
         htmlElement.style.backgroundImage = "url('" + htmlElement.getAttribute("data-imagehref") + "')";
+        htmlElement.style.backgroundRepeat = "no-repeat";
+        htmlElement.style.backgroundPosition = "center";
+
+        let temp = document.createElement("img")
+
+        //todo finish this
+        htmlElement.style.backgroundSize = "100vw 100vw";
     });
 }
