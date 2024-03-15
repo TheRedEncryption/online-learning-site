@@ -53,6 +53,13 @@ function redirectToSignIn(){
 
 // data functions (aka, functions specifically for custom attributes, those that start with "data-")
 
+const getSize = (url, cb) => {
+    const img = new Image();
+    img.src = url;
+    img.onload = () => cb(null, img);
+    img.onerror = (err) => cb(err);
+  };
+
 function imagehref() {
     let tab = findElementWithAttribute("data-imagehref")
     tab.forEach(function(htmlElement){
@@ -62,23 +69,18 @@ function imagehref() {
         htmlElement.style.backgroundRepeat = "no-repeat";
         htmlElement.style.backgroundPosition = "center";
 
-        let temp = new Image();
-        temp.src = data;
-        let width = temp.width;
-        let height = temp.height;
-    
+        var width = 1;
+        var height = 2;
 
-        let aspectRatio = width / height;
+        getSize(data, (err, img) => {
+            width = img.naturalWidth;
+            height = img.naturalHeight;
 
-        let properHeight = 100 / aspectRatio;
+            let aspectRatio = width / height;
 
-        htmlElement.style.backgroundSize = "100vw " + properHeight + "vw";
-
-        delete(temp);
-        delete(width);
-        delete(height);
-        delete(aspectRatio);
-        delete(properHeight);
+            let properHeight = 100 / aspectRatio;
+            htmlElement.style.backgroundSize = "100vw " + properHeight + "vw";
+        });
 
     });
 }
