@@ -24,8 +24,14 @@ function populateHeader() {
     */
 }
 
+// Redirects to a sign in page
+function redirectToSignIn(){
+    window.location.replace("userAuth.html");
+}
+
 // data functions (aka, functions specifically for custom attributes, those that start with "data-")
 
 function imagehref() {
     // TODO: get table of all elements with data-imagehref and then set their background images to the image
 }
+

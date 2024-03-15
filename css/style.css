@@ -11,6 +11,7 @@ body{
     text-align: center;
     padding: 10vh 20vw;
     background-color: brown;
+    justify-content: center
 }
 
 .white{
