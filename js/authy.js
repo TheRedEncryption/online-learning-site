@@ -1,7 +1,7 @@
 // Import the functions you need from the SDKs you need
 import { initializeApp } from "https://www.gstatic.com/firebasejs/10.8.1/firebase-app.js";
 import { getAnalytics } from "https://www.gstatic.com/firebasejs/10.8.1/firebase-analytics.js";
-import { GoogleAuthProvider, connectAuthEmulator, getAuth, onAuthStateChanged, signInWithPopup, signOut, sendEmailVerification, sendPasswordResetEmail, signInWithEmailAndPassword, createUserWithEmailAndPassword, } from "https://www.gstatic.com/firebasejs/10.8.1/firebase-auth.js";
+import { GoogleAuthProvider, connectAuthEmulator, getAuth, onAuthStateChanged, signInWithPopup, signOut, sendEmailVerification, sendPasswordResetEmail, signInWithEmailAndPassword, createUserWithEmailAndPassword} from "https://www.gstatic.com/firebasejs/10.8.1/firebase-auth.js";
 // TODO: Add SDKs for Firebase products that you want to use
 // https://firebase.google.com/docs/web/setup#available-libraries
 
@@ -19,6 +19,7 @@ const firebaseConfig = {
 
 // Initialize Firebase
 const app = initializeApp(firebaseConfig);
+const admin = null;
 const analytics = getAnalytics(app);
 
 const auth = getAuth();
@@ -205,6 +206,32 @@ function sendPasswordReset() {
 // Listening for auth state changes.
 onAuthStateChanged(auth, function (user) {
   if (user) {
+    // const listAllUsers = (nextPageToken) => {
+    //   // List batch of users, 1000 at a time.
+    //   let userNumber = 0;
+    //   getAuth()
+    //     .listUsers(1000, nextPageToken)
+    //     .then((listUsersResult) => {
+    //       listUsersResult.users.forEach((userRecord) => {
+    //         userNumber++;
+    //         //console.log('user', userRecord.toJSON());
+    //       });
+    //       if (listUsersResult.pageToken) {
+    //         // List next batch of users.
+    //         listAllUsers(listUsersResult.pageToken);
+    //       }
+    //     })
+    //     .catch((error) => {
+    //       console.log('Error listing users:', error);
+    //     });
+    //   return userNumber;
+    // };
+    // // Start listing users from the beginning, 1000 at a time.
+    // let amountOfUsers = listAllUsers();
+    // let temp = document.getElementsByClassName("number-of-users");
+    // for (item of temp){
+    //   item.innerText = amountOfUsers;
+    // };
     // User is signed in.
     const displayName = user.displayName;
     const email = user.email;
