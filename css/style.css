@@ -40,6 +40,12 @@ body{
     align-content: center;
     justify-content: center;
     align-items:center;
+    padding:1em;
+}
+
+.footer{
+    background-color:#980000ff;
+    padding: 1em;
 }
 
 button{
