@@ -66,13 +66,13 @@ function imagehref() {
         temp.src = data;
         let width = temp.width;
         let height = temp.height;
+    
 
         let aspectRatio = width / height;
 
         let properHeight = 100 / aspectRatio;
 
         htmlElement.style.backgroundSize = "100vw " + properHeight + "vw";
-        htmlElement.style;
 
         delete(temp);
         delete(width);

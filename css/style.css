@@ -11,11 +11,33 @@ body{
     text-align: center;
     padding: 10vh 20vw;
     background-color: brown;
-    justify-content: center
+    justify-content: center;
+    flex-wrap:wrap;
 }
 
 .white{
     color:white;
+}
+
+@keyframes slideAcross{
+    0%{
+        background-image: linear-gradient(to right, red , #980000ff, red, #980000ff);
+        background-position: 0% 0%;
+    }
+    50%{
+        background-position: 50% 0%;
+    }
+    100%{
+        background-position: 0% 0%;
+    }
+}
+
+.shinyRed{
+    background-size: 400%;
+    background-image: linear-gradient(to right, red , #980000ff, red, #980000ff);
+}
+.shinyRed:hover{
+    animation: slideAcross 2s linear 0s infinite forwards;
 }
 
 .bold{
