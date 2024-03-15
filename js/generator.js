@@ -53,12 +53,12 @@ function redirectToSignIn(){
 
 // data functions (aka, functions specifically for custom attributes, those that start with "data-")
 
-const getSize = (url, cb) => {
+function getSize(url, cb) {
     const img = new Image();
     img.src = url;
     img.onload = () => cb(null, img);
     img.onerror = (err) => cb(err);
-  };
+}
 
 function imagehref() {
     let tab = findElementWithAttribute("data-imagehref")

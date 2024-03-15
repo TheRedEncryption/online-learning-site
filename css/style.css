@@ -15,6 +15,16 @@ body{
     flex-wrap:wrap;
 }
 
+.mediumSection{
+    height:30vh;
+    display:flex;
+    text-align: left;
+    padding: 10vh 20vw;
+    background-color: rgb(255, 255, 255);
+    justify-content: left;
+    flex-wrap:wrap;
+}
+
 .white{
     color:white;
 }
