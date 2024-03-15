@@ -1,7 +1,7 @@
 // Import the functions you need from the SDKs you need
 import { initializeApp } from "https://www.gstatic.com/firebasejs/10.8.1/firebase-app.js";
 import { getAnalytics } from "https://www.gstatic.com/firebasejs/10.8.1/firebase-analytics.js";
-import { GoogleAuthProvider, connectAuthEmulator, getAuth, onAuthStateChanged, signInWithPopup, signOut,} from "https://www.gstatic.com/firebasejs/10.8.1/firebase-auth.js";
+import { GoogleAuthProvider, connectAuthEmulator, getAuth, onAuthStateChanged, signInWithPopup, signOut, sendEmailVerification, sendPasswordResetEmail, signInWithEmailAndPassword, createUserWithEmailAndPassword, } from "https://www.gstatic.com/firebasejs/10.8.1/firebase-auth.js";
 // TODO: Add SDKs for Firebase products that you want to use
 // https://firebase.google.com/docs/web/setup#available-libraries
 
@@ -30,15 +30,41 @@ if (window.location.hostname === 'localhost') {
 const signInButton = document.getElementById(
   'quickstart-sign-in',
 );
-const oauthToken = document.getElementById(
-  'quickstart-oauthtoken',
+const userProfileImg = document.getElementById(
+  'user-profile-image',
 );
-const signInStatus = document.getElementById(
-  'quickstart-sign-in-status',
+
+const emailInput = document.getElementById('email');
+const passwordInput = document.getElementById('password');
+const emailSignInButton = document.getElementById(
+  'quickstart-sign-in-email',
 );
-const accountDetails = document.getElementById(
-  'quickstart-account-details',
+const signUpButton = document.getElementById(
+  'quickstart-sign-up',
 );
+const passwordResetButton = document.getElementById(
+  'quickstart-password-reset',
+);
+const verifyEmailButton = document.getElementById(
+  'quickstart-verify-email',
+);
+// const signInStatus = document.getElementById(
+//   'quickstart-sign-in-status',
+// );
+// const accountDetails = document.getElementById(
+//   'quickstart-account-details',
+// );
+
+
+// const oauthToken = document.getElementById(
+//   'quickstart-oauthtoken',
+// );
+// const signInStatus = document.getElementById(
+//   'quickstart-sign-in-status',
+// );
+// const accountDetails = document.getElementById(
+//   'quickstart-account-details',
+// );
 
 /**
  * Function called when clicking the Login/Logout button.
@@ -46,7 +72,7 @@ const accountDetails = document.getElementById(
 function toggleSignIn() {
   if (!auth.currentUser) {
     const provider = new GoogleAuthProvider();
-    provider.addScope('https://www.googleapis.com/auth/contacts.readonly');
+    //provider.addScope('https://www.googleapis.com/auth/contacts.readonly');
     signInWithPopup(auth, provider)
       .then(function (result) {
         if (!result) return;
@@ -55,7 +81,7 @@ function toggleSignIn() {
         const token = credential?.accessToken;
         // The signed-in user info.
         const user = result.user;
-        oauthToken.textContent = token ?? '';
+        //oauthToken.textContent = token ?? '';
       })
       .catch(function (error) {
         // Handle Errors here.
@@ -81,6 +107,101 @@ function toggleSignIn() {
   signInButton.disabled = true;
 }
 
+/**
+ * Handles the sign in button press.
+ */
+function toggleSignInEmail() {
+  if (auth.currentUser) {
+    signOut(auth);
+  } else {
+    const email = emailInput.value;
+    const password = passwordInput.value;
+    if (email.length < 4) {
+      alert('Please enter an email address.');
+      return;
+    }
+    if (password.length < 4) {
+      alert('Please enter a password.');
+      return;
+    }
+    // Sign in with email and pass.
+    signInWithEmailAndPassword(auth, email, password).catch(function (error) {
+      // Handle Errors here.
+      const errorCode = error.code;
+      const errorMessage = error.message;
+      if (errorCode === 'auth/wrong-password') {
+        alert('Wrong password.');
+      } else {
+        alert(errorMessage);
+      }
+      console.log(error);
+      emailSignInButton.disabled = false;
+    });
+  }
+  emailSignInButton.disabled = true;
+}
+
+/**
+ * Handles the sign up button press.
+ */
+function handleSignUp() {
+  const email = emailInput.value;
+  const password = passwordInput.value;
+  if (email.length < 4) {
+    alert('Please enter an email address.');
+    return;
+  }
+  if (password.length < 4) {
+    alert('Please enter a password.');
+    return;
+  }
+  // Create user with email and pass.
+  createUserWithEmailAndPassword(auth, email, password).catch(function (error) {
+    // Handle Errors here.
+    const errorCode = error.code;
+    const errorMessage = error.message;
+    if (errorCode == 'auth/weak-password') {
+      alert('The password is too weak.');
+    } else {
+      alert(errorMessage);
+    }
+    console.log(error);
+  });
+}
+
+/**
+ * Sends an email verification to the user.
+ */
+function sendVerificationEmailToUser() {
+  if(!auth.currentUser){
+    return;
+  }
+  sendEmailVerification(auth.currentUser).then(function () {
+    // Email Verification sent!
+    alert('Email Verification Sent!');
+  });
+}
+
+function sendPasswordReset() {
+  const email = emailInput.value;
+  sendPasswordResetEmail(auth, email)
+    .then(function () {
+      // Password Reset Email Sent!
+      alert('Password Reset Email Sent!');
+    })
+    .catch(function (error) {
+      // Handle Errors here.
+      const errorCode = error.code;
+      const errorMessage = error.message;
+      if (errorCode == 'auth/invalid-email') {
+        alert(errorMessage);
+      } else if (errorCode == 'auth/user-not-found') {
+        alert(errorMessage);
+      }
+      console.log(error);
+    });
+}
+
 // Listening for auth state changes.
 onAuthStateChanged(auth, function (user) {
   if (user) {
@@ -92,17 +213,51 @@ onAuthStateChanged(auth, function (user) {
     const isAnonymous = user.isAnonymous;
     const uid = user.uid;
     const providerData = user.providerData;
-    signInStatus.textContent = 'Signed in';
-    signInButton.textContent = 'Sign out';
-    accountDetails.textContent = JSON.stringify(user, null, '  ');
+    // signInStatus.textContent = 'Signed in';
+    if (signInButton) {
+      signInButton.textContent = 'Sign out';
+    }
+    // signInStatus.textContent = 'Signed in';
+    if(emailSignInButton){
+      emailSignInButton.textContent = 'Sign out';
+      //accountDetails.textContent = JSON.stringify(user, null, '  ');
+    }
+    if (!emailVerified) {
+      verifyEmailButton.disabled = false;
+    }
+    // accountDetails.textContent = JSON.stringify(user, null, '  ');
+    var newImg = new Image;
+    newImg.onload = function () {
+      userProfileImg.src = this.src;
+      userProfileImg.style.marginTop = "1em";
+      userProfileImg.style.borderRadius = "50%";
+    }
+    newImg.src = photoURL;
+
   } else {
     // User is signed out.
-    signInStatus.textContent = 'Signed out';
-    signInButton.textContent = 'Sign in with Google';
-    accountDetails.textContent = 'null';
-    oauthToken.textContent = 'null';
+    // signInStatus.textContent = 'Signed out';
+    if (signInButton) {
+      signInButton.textContent = 'Sign in with Google';
+    }
+    //signInStatus.textContent = 'Signed out';
+    if(emailSignInButton){
+      emailSignInButton.textContent = 'Sign in';
+      //accountDetails.textContent = 'null';
+    }
+    //accountDetails.textContent = 'null';
+    //oauthToken.textContent = 'null';
+    userProfileImg.src = "";
   }
-  signInButton.disabled = false;
+  if (signInButton) {
+    signInButton.disabled = false;
+    emailSignInButton.disabled = false;
+  }
 });
-
-signInButton.addEventListener('click', toggleSignIn, false);
+if (signInButton) {
+  signInButton.addEventListener('click', toggleSignIn, false);
+  emailSignInButton.addEventListener('click', toggleSignInEmail, false);
+  signUpButton.addEventListener('click', handleSignUp, false);
+  verifyEmailButton.addEventListener('click', sendVerificationEmailToUser, false);
+  passwordResetButton.addEventListener('click', sendPasswordReset, false);
+}
