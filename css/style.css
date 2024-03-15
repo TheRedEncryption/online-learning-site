@@ -80,3 +80,8 @@ button{
 button:hover{
     background-color: gray;
 }
+
+.authy{
+    display: flex;
+    flex-direction: column;
+}
