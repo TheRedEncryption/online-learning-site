@@ -6,6 +6,7 @@ function initialize() {
     // init stuff goes here
     // window.alert("Yeah!");
     imagehref();
+    fontSize();
 }
 
 /*
@@ -53,16 +54,44 @@ function redirectToSignIn(){
 // data functions (aka, functions specifically for custom attributes, those that start with "data-")
 
 function imagehref() {
-    // TODO: get table of all elements with data-imagehref and then set their background images to the image
     let tab = findElementWithAttribute("data-imagehref")
     tab.forEach(function(htmlElement){
-        htmlElement.style.backgroundImage = "url('" + htmlElement.getAttribute("data-imagehref") + "')";
+
+        let data = htmlElement.getAttribute("data-imagehref")
+        htmlElement.style.backgroundImage = "url('" + data + "')";
         htmlElement.style.backgroundRepeat = "no-repeat";
         htmlElement.style.backgroundPosition = "center";
 
-        let temp = document.createElement("img")
+        let temp = new Image();
+        temp.src = data;
+        let width = temp.width;
+        let height = temp.height;
 
-        //todo finish this
-        htmlElement.style.backgroundSize = "100vw 100vw";
+        let aspectRatio = width / height;
+
+        let properHeight = 100 / aspectRatio;
+
+        htmlElement.style.backgroundSize = "100vw " + properHeight + "vw";
+        htmlElement.style.
+
+        delete(temp);
+        delete(width);
+        delete(height);
+        delete(aspectRatio);
+        delete(properHeight);
+
     });
+}
+
+function fontSize(){
+
+    let tab = findElementWithAttribute("data-fontsize")
+
+    tab.forEach(function(htmlElement){
+        
+        let data = htmlElement.getAttribute("data-fontsize")
+        htmlElement.style.fontSize = data + "px";
+
+    });
+
 }
