@@ -64,7 +64,14 @@ function imagehref() {
     let tab = findElementWithAttribute("data-imagehref")
     tab.forEach(function(htmlElement){
 
-        let data = htmlElement.getAttribute("data-imagehref")
+        let data = htmlElement.getAttribute("data-imagehref");
+        let dimension = htmlElement.getAttribute("data-prioritize-dimension"); // make this work lol
+        let ignore = htmlElement.getAttribute("data-ignore-rescale")
+
+        if (dimension == null) {
+            dimension = "width";
+        }
+
         htmlElement.style.backgroundImage = "url('" + data + "')";
         htmlElement.style.backgroundRepeat = "no-repeat";
         htmlElement.style.backgroundPosition = "center";
@@ -76,10 +83,13 @@ function imagehref() {
             width = img.naturalWidth;
             height = img.naturalHeight;
 
-            let aspectRatio = width / height;
+            if(ignore != "true"){
+                let aspectRatio = width / height;
 
-            let properHeight = 100 / aspectRatio;
-            htmlElement.style.backgroundSize = "100vw " + properHeight + "vw";
+                let properHeight = 100 / aspectRatio;
+                
+                htmlElement.style.backgroundSize = "100vw " + properHeight + "vw";
+            }
         });
 
     });
