@@ -23,6 +23,31 @@ body{
     flex-wrap:wrap;
 }
 
+.mediumSection {
+    height:max(30vh,fit-content);
+    display:flex;
+    text-align: left;
+    padding: 10vh 10vw;
+    max-width: 80vw;
+    background-color: rgb(255, 255, 255);
+    background-clip: content-box;
+    justify-content: space-between;
+    flex-wrap:wrap;
+    flex-direction:row;
+}
+
+.mediumText{
+    width:49%
+}
+
+.mediumImage {
+    display: flex;
+    width:49%;
+    background-size: auto;
+    align-items: center;
+    justify-content: center;
+}
+
 .white{
     color:white;
 }
@@ -94,4 +119,21 @@ button:hover{
 .authy{
     display: flex;
     flex-direction: column;
+}
+
+/* only use these for css debugging */
+
+.redborder{
+    border: solid red;
+    border-width: 5px;
+}
+
+.limeborder{
+    border: solid lime;
+    border-width: 5px;
+}
+
+.blueborder{
+    border: solid blue;
+    border-width: 5px;
 }
