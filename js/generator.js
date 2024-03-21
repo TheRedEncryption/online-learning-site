@@ -8,6 +8,7 @@ function initialize() {
     imagehref();
     fontSize();
     replaceTemplates();
+    favicon();
 }
 
 /*
@@ -42,6 +43,22 @@ function replaceTemplates(){
     $(function(){
         $("header-template").load("./templates/header-template.html"); 
     });
+}
+
+function favicon(){
+    let headicons =
+    `
+    <link rel="apple-touch-icon" sizes="180x180" href="/icons/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="/icons/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="/icons/favicon-16x16.png">
+    <link rel="manifest" href="/icons/site.webmanifest">
+    <link rel="mask-icon" href="/icons/safari-pinned-tab.svg" color="#b91d47">
+    <link rel="shortcut icon" href="/icons/favicon.ico">
+    <meta name="msapplication-TileColor" content="#b91d47">
+    <meta name="msapplication-config" content="/icons/browserconfig.xml">
+    <meta name="theme-color" content="#000000">
+    `
+    document.head.innerHTML += headicons;
 }
 
 // data functions (aka, functions specifically for custom attributes, those that start with "data-")
