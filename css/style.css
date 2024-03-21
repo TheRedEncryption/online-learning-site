@@ -1,9 +1,17 @@
+html{
+    -ms-overflow-style: none;
+    /* IE and Edge */
+    scrollbar-width: none;
+    /* Firefox */
+}
+html::-webkit-scrollbar {
+    display: none;
+}
 body{
     font-family: 'Trebuchet MS', sans-serif;
     margin: 0px;
     margin-top: 10vh;
 }
-
 .largeSection{
     height:70vh;
     display:flex;
@@ -53,6 +61,8 @@ body{
 .buttons{
     padding:1em;
 }
+
+
 
 .header{
     width:100%;
