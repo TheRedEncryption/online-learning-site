@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <!-- metatags -->
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>The RED | Log In</title>
+
+    <meta property="og:title" content="The Ruby E-Institute of Dreams">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://theredencryption.github.io/online-learning-site">
+    <meta property="og:image" content="">
+    <meta property="og:description"
+        content="Play! Learn! Explore! The only limit is your imagination, welcome to TheRED!">
+
+    <!-- scripts -->
+    <script defer src="js/authy.js" type="module"></script>
+    <script defer src="js/storage.js" type="module"></script>
+    <script src="js/redirects.js"></script>
+    <link rel="stylesheet" href="css/style.css">
+    <link href="https://fonts.cdnfonts.com/css/trebuchet-ms-2" rel="stylesheet">
+
+</head>
+
+<body>
+    <!-- header goes here -->
+    <div class="header sticky">
+        <h1 class="white bold">
+            <a href="index.html" style="color: inherit; text-decoration: none;">
+                The Ruby E-Institute of Dreams
+            </a>
+        </h1>
+        <div class="buttons">
+            <button onclick="redirectToLearnPage()">
+                Learn
+            </button>
+            <button onclick="redirectToDiscussPage()">
+                Discuss
+            </button>
+            <button onclick="redirectToSignIn()">
+                Log In/Sign Up
+            </button>
+        </div>
+        <img id="user-profile-image"></img>
+    </div>
+    <div class="largeSection white" data-imagehref="./assets/images/landingPageBackground.png" data-fontsize="24">
+        <div class="uploadContainer">
+            <label for="uploadFileInput">File</label>
+            <input id="uploadFileInput" name="file" type="file"/>
+            <button id="uploadFileButton">Upload</button>
+        </div>
+    </div>
+</body>

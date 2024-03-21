@@ -14,7 +14,8 @@ const firebaseConfig = {
   storageBucket: "the-ruby-e-institute-of-dreams.appspot.com",
   messagingSenderId: "380371112503",
   appId: "1:380371112503:web:44b1c9bc5fa3b0362ea5b2",
-  measurementId: "G-WFLRF3N7KK"
+  measurementId: "G-WFLRF3N7KK",
+  storageBucket: 'gs://the-ruby-e-institute-of-dreams.appspot.com'
 };
 
 // Initialize Firebase

@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
 
     <!-- metatags -->
@@ -11,11 +12,13 @@
     <meta property="og:type" content="website">
     <meta property="og:url" content="https://theredencryption.github.io/online-learning-site">
     <meta property="og:image" content="">
-    <meta property="og:description" content="Play! Learn! Explore! The only limit is your imagination, welcome to TheRED!">
+    <meta property="og:description"
+        content="Play! Learn! Explore! The only limit is your imagination, welcome to TheRED!">
 
     <!-- scripts and imports -->
     <script defer src="js/authy.js" type="module"></script>
     <script src="js/generator.js"></script>
+    <script src="js/redirects.js"></script>
 
     <!-- god forgive me for using jquery and not pure js -->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
@@ -24,6 +27,7 @@
     <link href="https://fonts.cdnfonts.com/css/trebuchet-ms-2" rel="stylesheet">
 
 </head>
+
 <body>
     <!-- header goes here -->
 
@@ -32,11 +36,11 @@
         <h1 class = "white bold">
             The Ruby E-Institute of Dreams
         </h1>
-        <div class = "buttons">
-            <button>
+        <div class="buttons">
+            <button onclick="redirectToLearnPage()">
                 Learn
             </button>
-            <button>
+            <button onclick="redirectToDiscussPage()">
                 Discuss
             </button>
             <button onclick="redirectToSignIn()">
@@ -47,7 +51,7 @@
     </div> -->
     <!-- divs and stuff go here (use js script thingy) -->
 
-    <div class="largeSection white" data-imagehref="./assets/images/landingPageBackground.png" data-fontsize = "24">
+    <div class="largeSection white" data-imagehref="./assets/images/landingPageBackground.png" data-fontsize="24">
         <h2>
             Boasting <p style="display: inline;" class="number-of-users">0</p> million monthly users and counting,
             The RED offers the educational solutions you need
@@ -61,17 +65,20 @@
 
     <div class="mediumSection" data-fontsize="16">
         <!-- stuff and things -->
-        <div class = "mediumText">
+        <div class="mediumText">
             <h1>
                 What is TheRED?
             </h1>
             <h2>
                 TheRED is an online learning platform made by students, for students, of students.
-                Courses here can be perused at one's convenience, as well as uploaded and maintained by teachers and prospective tutors.
-                Teach everyone about anything and everything! Come aboard the Ruby E-Institute of Dreams to make your own education-related
+                Courses here can be perused at one's convenience, as well as uploaded and maintained by teachers and
+                prospective tutors.
+                Teach everyone about anything and everything! Come aboard the Ruby E-Institute of Dreams to make your
+                own education-related
                 fantasies come true! <br><br>
 
-                There are a few things you can do on our site: for example, make an account, learn, or even discuss topics that are related
+                There are a few things you can do on our site: for example, make an account, learn, or even discuss
+                topics that are related
                 with what you are learning! <br><br>
 
                 Thank you for choosing TheRED! <br><br>
@@ -123,4 +130,5 @@
         &copy; The Ruby E-Institute of Dreams
     </div>
 </body>
+
 </html>

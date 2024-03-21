@@ -44,11 +44,6 @@ function replaceTemplates(){
     });
 }
 
-// Redirects to a sign in page
-function redirectToSignIn(){
-    window.location.replace("userAuth.html");
-}
-
 // data functions (aka, functions specifically for custom attributes, those that start with "data-")
 
 function getSize(url, cb) {
