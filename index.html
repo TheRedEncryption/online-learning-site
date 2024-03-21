@@ -13,16 +13,22 @@
     <meta property="og:image" content="">
     <meta property="og:description" content="Play! Learn! Explore! The only limit is your imagination, welcome to TheRED!">
 
-    <!-- scripts -->
+    <!-- scripts and imports -->
     <script defer src="js/authy.js" type="module"></script>
     <script src="js/generator.js"></script>
+
+    <!-- god forgive me for using jquery and not pure js -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+
     <link rel="stylesheet" href="css/style.css">
     <link href="https://fonts.cdnfonts.com/css/trebuchet-ms-2" rel="stylesheet">
 
 </head>
 <body>
     <!-- header goes here -->
-    <div class="header sticky">
+
+    <header-template></header-template>
+    <!-- <div class="header sticky">
         <h1 class = "white bold">
             The Ruby E-Institute of Dreams
         </h1>
@@ -38,7 +44,7 @@
             </button>
         </div>
         <img id="user-profile-image"></img>
-    </div>
+    </div> -->
     <!-- divs and stuff go here (use js script thingy) -->
 
     <div class="largeSection white" data-imagehref="./assets/images/landingPageBackground.png" data-fontsize = "24">
@@ -47,7 +53,7 @@
             The RED offers the educational solutions you need
             to be successful in life!
             <br><br>
-            <button class = "shinyRed bold white" data-fontsize="18">
+            <button class = "shinyRed bold white" data-fontsize="18" onclick="redirectToSignIn()">
                 Create a free account and get learning!
             </button>
         </h2>
@@ -76,6 +82,39 @@
         data-imagehref="./assets/images/whoarewesquare.png"
         data-ignore-rescale="true"></div>
 
+    </div>
+
+    <div class="mediumSection" data-fontsize="16">
+        <div class="mediumImage"
+        data-imagehref="./assets/images/whoarewesquare.png"
+        data-ignore-rescale="true"></div>
+        <div class = "mediumText">
+            <h1>
+                How does this work?
+            </h1>
+            <h2>
+                <ol>
+                    <li>
+                        You log in or sign up
+                    </li>
+                    <li>
+                        You head over to the Learn tab
+                    </li>
+                    <li>
+                        You select one of the courses to learn from
+                    </li>
+                    <li>
+                        You enjoy the course
+                    </li>
+                    <li>
+                        Repeat until As on your tests!!!
+                    </li>
+                </ol>
+
+                Good luck and have fun!
+                <br><br>
+            </h2>
+        </div>
     </div>
 
     <!-- footer goes here -->
