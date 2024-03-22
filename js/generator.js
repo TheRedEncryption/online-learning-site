@@ -58,7 +58,7 @@ function favicon(){
     <meta name="msapplication-config" content="/icons/browserconfig.xml">
     <meta name="theme-color" content="#000000">
     `
-    document.head.innerHTML += headicons;
+    $('head').append(headicons);
 }
 
 // data functions (aka, functions specifically for custom attributes, those that start with "data-")
