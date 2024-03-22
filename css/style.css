@@ -61,23 +61,37 @@ body{
 
 @keyframes slideAcross{
     0%{
-        background-image: linear-gradient(to right, red , #980000ff, red, #980000ff);
+        background-image: linear-gradient(to right, red , #980000ff, red, #980000ff, red, #980000ff);
         background-position: 0% 0%;
-    }
-    50%{
-        background-position: 50% 0%;
     }
     100%{
-        background-position: 0% 0%;
+        background-position: 50% 0%;
     }
 }
 
+@keyframes sillyRotation{
+    0%{
+        transform: rotate(-1deg);
+    }
+    50%{
+        transform: rotate(1deg);
+    }
+    100%{
+        transform: rotate(-1deg);
+    }
+
+}
+
 .shinyRed{
-    background-size: 400%;
-    background-image: linear-gradient(to right, red , #980000ff, red, #980000ff);
+    background-size: 450%;
+    background-image: linear-gradient(to right, red , #980000ff, red, #980000ff, red, #980000ff);
 }
 .shinyRed:hover{
-    animation: slideAcross 2s linear 0s infinite forwards;
+    animation: slideAcross 1s linear 0s infinite forwards;
+}
+
+.sillyRotate:hover{
+    animation: sillyRotation 2s linear 0s infinite forwards;
 }
 
 .bold{
@@ -145,6 +159,8 @@ button:hover{
     border-width: 5px;
 }
 
+/* only use above for css debugging */
+
 .curve{
     position:absolute;
     bottom:0;
@@ -156,4 +172,17 @@ button:hover{
     height: 30%;
     background-color: #980000;
     transform:translate(0%, 50%);
+}
+
+.course-holder{
+    background-color: white;
+    border-radius: 1em;
+    padding: 1em;
+    min-width: 20%;
+    width: min-content;
+    margin:1em;
+}
+
+.containerWidth{
+    width:100%;
 }

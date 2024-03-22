@@ -4,20 +4,11 @@ document.addEventListener('DOMContentLoaded', initialize, false);
 
 function initialize() {
     // init stuff goes here
-    // window.alert("Yeah!");
     imagehref();
-    fontSize();
     replaceTemplates();
     favicon();
+    fontSize();
 }
-
-/*
-add functions here for generating:
- - header div
- - footer div
- - other divs that require multiple child DOMs
-*/
-
 
 /** 
  * @function findElementWithAttribute
@@ -39,9 +30,9 @@ function findElementWithAttribute(attributeName){
 }
 
 function replaceTemplates(){
-    var templates = document.getElementsByTagName("temp-late");
     $(function(){
-        $("header-template").load("./templates/header-template.html"); 
+        $("header-template").load("./templates/header-template.html");
+        $("course-holder-template").load("./templates/course-holder-template.html");
     });
 }
 
