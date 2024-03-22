@@ -184,11 +184,20 @@ button:hover{
     background-color: white;
     border-radius: 1em;
     padding: 1em;
-    min-width: 20%;
+    min-width: 20em;
     width: min-content;
     margin:1em;
 }
 
 .containerWidth{
     width:100%;
+}
+
+.course-holder-holder{
+    background-color: rgb(240, 240, 240);
+    display: flex;
+    width:100%;
+    padding: 2em 0em;
+    margin: 1em 0em;
+    overflow: scroll;
 }
