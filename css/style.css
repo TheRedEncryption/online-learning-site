@@ -209,7 +209,7 @@ h1.sectionHeader {
 @import url('https://fonts.googleapis.com/css2?family=Reddit+Mono&display=swap');
 
 .textarea{
-    width:80%;
+    width:45%;
     height:fit-content;
     min-height: 60vh;
     resize: vertical;
@@ -221,5 +221,14 @@ h1.sectionHeader {
 
 .textareaholder{
     display: flex;
-    justify-content: center;
+    justify-content: space-around;
+}
+
+#mdpreviewcontent{
+    min-height: 10vh;
+    background-color: white;
+    width:45%;
+    font-size: 18px;
+    padding: 0px 25px;
+    border-radius: 25px;
 }

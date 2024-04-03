@@ -6,10 +6,10 @@ var textArea;
 
 function initMd(){
     textArea = document.getElementById("textarea");
-    textArea.addEventListener("change", updateMd)
+    textArea.addEventListener("input", updateMd)
 }
 
 function updateMd(){
-    var contentMd = document.getElementById("content");
+    var contentMd = document.getElementById("mdpreviewcontent");
     contentMd.innerHTML = marked.parse(textArea.value);
 }
