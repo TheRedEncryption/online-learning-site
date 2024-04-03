@@ -201,3 +201,7 @@ button:hover{
     margin: 1em 0em;
     overflow: scroll;
 }
+
+h1.sectionHeader {
+    margin-left: 1em;
+}
