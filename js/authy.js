@@ -256,9 +256,11 @@ onAuthStateChanged(auth, function (user) {
     // accountDetails.textContent = JSON.stringify(user, null, '  ');
     var newImg = new Image;
     newImg.onload = function () {
-      userProfileImg.src = this.src;
-      userProfileImg.style.marginTop = "1em";
-      userProfileImg.style.borderRadius = "50%";
+      if(userProfileImg){
+        userProfileImg.src = this.src;
+        userProfileImg.style.marginTop = "1em";
+        userProfileImg.style.borderRadius = "50%";
+      }
     }
     newImg.src = photoURL;
 
@@ -275,7 +277,9 @@ onAuthStateChanged(auth, function (user) {
     }
     //accountDetails.textContent = 'null';
     //oauthToken.textContent = 'null';
-    userProfileImg.src = "";
+    if(userProfileImg){
+      userProfileImg.src = "";
+    }
   }
   if (signInButton) {
     signInButton.disabled = false;
