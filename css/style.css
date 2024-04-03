@@ -205,3 +205,21 @@ button:hover{
 h1.sectionHeader {
     margin-left: 1em;
 }
+
+@import url('https://fonts.googleapis.com/css2?family=Reddit+Mono&display=swap');
+
+.textarea{
+    width:80%;
+    height:fit-content;
+    min-height: 60vh;
+    resize: vertical;
+    font-family: 'Reddit Mono', monospace;
+    font-size: 18px;
+    padding:25px;
+    border-radius: 25px;
+}
+
+.textareaholder{
+    display: flex;
+    justify-content: center;
+}
