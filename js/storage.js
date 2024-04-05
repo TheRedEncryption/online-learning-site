@@ -8,11 +8,11 @@ const storage = getStorage();
 // Create a storage reference from our storage service
 
 const uploadFileButton = document.getElementById(
-    'uploadFileButton',
+  'uploadFileButton',
 );
 
 const uploadFileInput = document.getElementById(
-    'uploadFileInput',
+  'uploadFileInput',
 );
 
 
@@ -31,19 +31,36 @@ onAuthStateChanged(auth, (user) => {
   }
 });
 
-window.onload = main();
+window.addEventListener("load", initialCall());
 
-function main(){
-    uploadFileButton.addEventListener("click", () => {
-        console.log("%cYIPPEE!", "color:rgb(0,100,100); font-size:30px; background-color:rgb(0,60,240)");
-        console.log(uploadFileInput.files[0].name);
-        // 'file' comes from the Blob or File API
-        //return;
-        if(!uploadFileInput.files.length || !storageRef){
-            return
-        }
-        uploadBytes(ref(storageRef, uploadFileInput.files[0].name), uploadFileInput.files[0]).then((snapshot) => {
-            console.log('Uploaded a blob or file!');
-        });
+function initialCall() {
+  uploadFileButton.addEventListener("click", () => {
+    console.log("%cYIPPEE!", "color:rgb(0,100,100); font-size:30px; background-color:rgb(0,60,240)");
+    console.log(uploadFileInput.files[0].name);
+    // 'file' comes from the Blob or File API
+    //return;
+    if (!uploadFileInput.files.length || !storageRef) {
+      return
+    }
+    uploadBytes(ref(storageRef, uploadFileInput.files[0].name), uploadFileInput.files[0]).then((snapshot) => {
+      console.log('Uploaded a blob or file!');
+      document.getElementById("toast-content").innerText = "Successfully uploaded file";
+      document.getElementById("toast-header-text").innerText = "File Uploaded";
+      var toastElList = [].slice.call(document.querySelectorAll('.toast'))
+      var toastList = toastElList.map(function (toastEl) {
+        return new bootstrap.Toast(toastEl)
+      })
+      toastList.forEach(toast => toast.show())
+    }).catch((error) => {
+      if(error.toString().includes("User does not have permission to access")){
+        document.getElementById("toast-content").innerText = "File does not meet requirements for uploading. \n\n" + error;
+      }
+      document.getElementById("toast-header-text").innerText = "File Upload Issue";
+      var toastElList = [].slice.call(document.querySelectorAll('.toast'))
+      var toastList = toastElList.map(function (toastEl) {
+        return new bootstrap.Toast(toastEl)
+      })
+      toastList.forEach(toast => toast.show())
     })
+  })
 }

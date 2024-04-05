@@ -11,5 +11,6 @@ function initMd(){
 
 function updateMd(){
     var contentMd = document.getElementById("mdpreviewcontent");
+    textArea.value = textArea.value.replace(/<|>/g, "")
     contentMd.innerHTML = marked.parse(textArea.value);
 }
