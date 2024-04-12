@@ -268,7 +268,7 @@ onAuthStateChanged(auth, function (user) {
     // User is signed out.
     // signInStatus.textContent = 'Signed out';
     if (signInButton) {
-      signInButton.textContent = 'Sign in with Google';
+      // signInButton.textContent = 'Sign in with Google';
     }
     //signInStatus.textContent = 'Signed out';
     if(emailSignInButton){

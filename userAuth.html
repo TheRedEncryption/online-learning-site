@@ -31,7 +31,7 @@
   <header-template></header-template>
   <!-- divs and stuff go here (use js script thingy) -->
 
-  <div class="largeSection white authy">
+  <div class="mediumSection authy">
     <main class="mdl-layout__content mdl-color--grey-100">
       <div class="mdl-cell mdl-cell--12-col mdl-cell--12-col-tablet mdl-grid">
         <!-- Container for the demo -->
@@ -48,10 +48,10 @@
               existing account or sign up
             </p>
 
-            <input class="mdl-textfield__input" style="display: inline; width: auto" type="text" id="email" name="email"
+            <input class="mdl-textfield__input authTextArea" style="display: inline; width: auto" type="text" id="email" name="email"
               placeholder="Email" />
             &nbsp;&nbsp;&nbsp;
-            <input class="mdl-textfield__input" style="display: inline; width: auto" type="password" id="password"
+            <input class="mdl-textfield__input authTextArea" style="display: inline; width: auto" type="password" id="password"
               name="password" placeholder="Password" />
             <br /><br />
             <button disabled class="mdl-button mdl-js-button mdl-button--raised" id="quickstart-sign-in-email"
@@ -70,7 +70,7 @@
             &nbsp;&nbsp;&nbsp;
             <button class="mdl-button mdl-js-button mdl-button--raised" id="quickstart-password-reset"
               name="verify-email">
-              Send Password Reset Email
+              Forgot Password?
             </button>
 
             <!-- Container where we'll display the user details -->
@@ -98,8 +98,8 @@
             <p>Sign in with your Google account below.</p>
 
             <!-- Button that handles sign-in/sign-out -->
-            <button disabled class="mdl-button mdl-js-button mdl-button--raised" id="quickstart-sign-in">
-              Sign in with Google
+            <button disabled class="mdl-button mdl-js-button mdl-button--raised gButton" id="quickstart-sign-in">
+              <img src="./assets/images/G.png" class = "gImg" />
             </button>
 
             <!-- Container where we'll display the user details -->
