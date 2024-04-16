@@ -7,14 +7,12 @@ html{
 
 html::-webkit-scrollbar {
     display: none;
-    min-height: 100vh;
 }
 
 body{
     font-family: 'Trebuchet MS', sans-serif;
     margin: 0px;
     margin-top: 13.9vh;
-    min-height: 100vh;
 }
 
 .grainy{
@@ -260,4 +258,20 @@ h1.sectionHeader {
     display: flex;
     justify-content: center;
     align-items: center;
+}
+
+.centerModule{
+    width:100%;
+    height:74vh;
+    display: flex;
+    justify-content: center;
+    margin-top:20%;
+}
+
+.centerBody{
+    background-color: white;
+    width:60%;
+    height:60%;
+    border-radius: 3em;
+    padding:3em;
 }
