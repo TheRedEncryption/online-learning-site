@@ -243,7 +243,8 @@ onAuthStateChanged(auth, function (user) {
     const providerData = user.providerData;
     // signInStatus.textContent = 'Signed in';
     if (signInButton) {
-      signInButton.textContent = 'Sign out';
+      // signInButton.textContent = 'Sign out';
+      signInButton.style = "display:none";
     }
     // signInStatus.textContent = 'Signed in';
     if(emailSignInButton){
@@ -269,6 +270,7 @@ onAuthStateChanged(auth, function (user) {
     // signInStatus.textContent = 'Signed out';
     if (signInButton) {
       // signInButton.textContent = 'Sign in with Google';
+      signInButton.style = "display:default";
     }
     //signInStatus.textContent = 'Signed out';
     if(emailSignInButton){

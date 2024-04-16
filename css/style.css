@@ -7,12 +7,14 @@ html{
 
 html::-webkit-scrollbar {
     display: none;
+    min-height: 100vh;
 }
 
 body{
     font-family: 'Trebuchet MS', sans-serif;
     margin: 0px;
     margin-top: 13.9vh;
+    min-height: 100vh;
 }
 
 .grainy{
@@ -31,16 +33,16 @@ body{
 }
 
 .mediumSection {
-    height:max(30vh,fit-content);
-    display:flex;
+    min-height: 30vh;
+    display:flex !important;
     text-align: left;
     padding: 10vh 10vw;
     max-width: 80vw;
     background-color: rgb(255, 255, 255);
     background-clip: content-box;
     justify-content: space-between;
-    flex-wrap:wrap;
-    flex-direction:row;
+    flex-wrap:wrap !important;
+    flex-direction:row !important;
 }
 
 .mediumText{
