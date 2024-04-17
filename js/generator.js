@@ -2,6 +2,10 @@
 
 document.addEventListener('DOMContentLoaded', initialize, false);
 
+document.addEventListener('templatesLoaded', postTemplates, false);
+
+const templatesLoaded = new Event("templatesLoaded");
+
 function initialize() {
     // init stuff goes here
     imagehref();
@@ -35,6 +39,35 @@ function replaceTemplates(){
         $("course-holder-template").load("./templates/course-holder-template.html");
         $("footer-template").load("./templates/footer-template.html");
     });
+    // is this even sensible? mi i scared... :fearful:
+    document.dispatchEvent(templatesLoaded);
+}
+
+function postTemplates(){
+    var profPic = document.getElementById('user-profile-image');
+    var profUrl = getCookie("profileUrl");
+    if (profUrl == "") {
+        profUrl = "/assets/images/user_profile_default.png";
+    }
+    profPic.style += "background-image: url(" + profUrl + ")";
+    profPic.classList.add(["redborder"])
+    alert(profPic);
+}
+
+/* yoinked from w3schools */
+function getCookie(cname) {
+    let name = cname + "=";
+    let ca = document.cookie.split(';');
+    for(let i = 0; i < ca.length; i++) {
+      let c = ca[i];
+      while (c.charAt(0) == ' ') {
+        c = c.substring(1);
+      }
+      if (c.indexOf(name) == 0) {
+        return c.substring(name.length, c.length);
+      }
+    }
+    return "";
 }
 
 function favicon(){

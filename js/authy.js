@@ -255,6 +255,10 @@ onAuthStateChanged(auth, function (user) {
       verifyEmailButton.disabled = false;
     }
     // accountDetails.textContent = JSON.stringify(user, null, '  ');
+
+    /* set document cookie */
+    document.cookie = "profileUrl=" + photoURL;
+
     var newImg = new Image;
     newImg.onload = function () {
       if(userProfileImg){

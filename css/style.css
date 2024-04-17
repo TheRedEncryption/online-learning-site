@@ -275,3 +275,12 @@ h1.sectionHeader {
     border-radius: 3em;
     padding:3em;
 }
+
+#user-profile-image{
+    width: 48px;
+    height: 48px;
+    border-radius: 24px;
+    background-color: white;
+    background-image: url('/assets/images/user_profile_default.png');
+    background-size: 48px 48px;
+}
