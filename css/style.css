@@ -230,7 +230,15 @@ h1.sectionHeader {
 
 .authy{
     display: flex;
-    flex-direction: column;
+    flex-direction: row;
+    justify-content:center;
+    align-content:center;
+    height:50vh;
+}
+
+.authHolder{
+    align-content: center;
+    padding:1em;
 }
 
 .authTextArea{

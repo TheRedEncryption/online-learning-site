@@ -22,12 +22,12 @@ function initialize() {
  * @param {String} attributeName The name of the attribute.
  * @returns A list of all elements with the attribute name
 */
-function findElementWithAttribute(attributeName){
+function findElementWithAttribute(attributeName) {
     // assuming attributeName is a String
     let out = [];
 
-    document.querySelectorAll('*').forEach(function(node) {
-        if (node.getAttribute(attributeName) != null){
+    document.querySelectorAll('*').forEach(function (node) {
+        if (node.getAttribute(attributeName) != null) {
             out.push(node);
         }
     });
@@ -35,23 +35,23 @@ function findElementWithAttribute(attributeName){
     return out;
 }
 
-function replaceTemplates(){
-    $(function(){
+function replaceTemplates() {
+    $(function () {
         $("header-template").load("./templates/header-template.html");
         $("course-holder-template").load("./templates/course-holder-template.html");
         $("footer-template").load("./templates/footer-template.html", onLoadEndJQuery);
     });
     // is this even sensible? mi i scared... :fearful:
-    function onLoadEndJQuery(){
+    function onLoadEndJQuery() {
         document.dispatchEvent(templatesLoaded);
     }
 }
 
-function postTemplates(){
+function postTemplates() {
     loadProfilePicture();
 }
 
-function loadProfilePicture(){
+function loadProfilePicture() {
     var profPic = document.getElementById('user-profile-image');
     var profUrl = getCookie("profileUrl");
     if (profUrl == "") {
@@ -65,21 +65,21 @@ function loadProfilePicture(){
 function getCookie(cname) {
     let name = cname + "=";
     let ca = document.cookie.split(';');
-    for(let i = 0; i < ca.length; i++) {
-      let c = ca[i];
-      while (c.charAt(0) == ' ') {
-        c = c.substring(1);
-      }
-      if (c.indexOf(name) == 0) {
-        return c.substring(name.length, c.length);
-      }
+    for (let i = 0; i < ca.length; i++) {
+        let c = ca[i];
+        while (c.charAt(0) == ' ') {
+            c = c.substring(1);
+        }
+        if (c.indexOf(name) == 0) {
+            return c.substring(name.length, c.length);
+        }
     }
     return "";
 }
 
-function favicon(){
+function favicon() {
     let headicons =
-    `
+        `
     <link rel="apple-touch-icon" sizes="180x180" href="./icons/apple-touch-icon.png">
     <link rel="icon" type="image/png" sizes="32x32" href="./icons/favicon-32x32.png">
     <link rel="icon" type="image/png" sizes="16x16" href="./icons/favicon-16x16.png">
@@ -104,7 +104,7 @@ function getSize(url, cb) {
 
 function imagehref() {
     let tab = findElementWithAttribute("data-imagehref")
-    tab.forEach(function(htmlElement){
+    tab.forEach(function (htmlElement) {
 
         let data = htmlElement.getAttribute("data-imagehref");
         let dimension = htmlElement.getAttribute("data-prioritize-dimension"); // make this work lol
@@ -125,11 +125,11 @@ function imagehref() {
             width = img.naturalWidth;
             height = img.naturalHeight;
 
-            if(ignore != "true"){
+            if (ignore != "true") {
                 let aspectRatio = width / height;
 
                 let properHeight = 100 / aspectRatio;
-                
+
                 htmlElement.style.backgroundSize = "100vw " + properHeight + "vw";
             }
         });
@@ -137,12 +137,12 @@ function imagehref() {
     });
 }
 
-function fontSize(){
+function fontSize() {
 
     let tab = findElementWithAttribute("data-fontsize")
 
-    tab.forEach(function(htmlElement){
-        
+    tab.forEach(function (htmlElement) {
+
         let data = htmlElement.getAttribute("data-fontsize")
         htmlElement.style.fontSize = data + "px";
 

@@ -10,6 +10,5 @@ function redirectToLearnPage(){
 
 // Redirects to a sign in page
 function redirectToDiscussPage(){
-    return;
-    window.location.replace("userAuth.html");
+    window.location.replace("discuss.html");
 }
