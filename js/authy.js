@@ -206,7 +206,11 @@ function sendPasswordReset() {
 
 // Listening for auth state changes.
 onAuthStateChanged(auth, function (user) {
+
+  var signedIn = false;
+
   if (user) {
+    signedIn = true;
     // const listAllUsers = (nextPageToken) => {
     //   // List batch of users, 1000 at a time.
     //   let userNumber = 0;
@@ -257,7 +261,7 @@ onAuthStateChanged(auth, function (user) {
     // accountDetails.textContent = JSON.stringify(user, null, '  ');
 
     /* set document cookie */
-    document.cookie = "profileUrl=" + photoURL;
+    set_cookie("profileUrl", photoURL);
 
     var newImg = new Image;
     newImg.onload = function () {
@@ -270,6 +274,7 @@ onAuthStateChanged(auth, function (user) {
     newImg.src = photoURL;
 
   } else {
+    signedIn = false;
     // User is signed out.
     // signInStatus.textContent = 'Signed out';
     if (signInButton) {
@@ -286,11 +291,20 @@ onAuthStateChanged(auth, function (user) {
     if(userProfileImg){
       userProfileImg.src = "";
     }
+
+    delete_cookie("profileUrl")
+
   }
+
   if (signInButton) {
     signInButton.disabled = false;
     emailSignInButton.disabled = false;
   }
+
+  // create and dispatch event :D
+  var authChangedEvent = new CustomEvent("authChanged", {detail: signedIn});
+  document.dispatchEvent(authChangedEvent);
+
 });
 if (signInButton) {
   signInButton.addEventListener('click', toggleSignIn, false);
@@ -298,4 +312,13 @@ if (signInButton) {
   signUpButton.addEventListener('click', handleSignUp, false);
   verifyEmailButton.addEventListener('click', sendVerificationEmailToUser, false);
   passwordResetButton.addEventListener('click', sendPasswordReset, false);
+}
+
+
+// yoinked from stackoverflow
+function set_cookie(name, value) {
+  document.cookie = name +'='+ value +'; Path=/;';
+}
+function delete_cookie(name) {
+  document.cookie = name +'=; Path=/; Expires=Thu, 01 Jan 1970 00:00:01 GMT;';
 }

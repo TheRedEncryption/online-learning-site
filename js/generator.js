@@ -4,6 +4,8 @@ document.addEventListener('DOMContentLoaded', initialize, false);
 
 document.addEventListener('templatesLoaded', postTemplates, false);
 
+document.addEventListener('authChanged', loadProfilePicture, false);
+
 const templatesLoaded = new Event("templatesLoaded");
 
 function initialize() {
@@ -37,21 +39,26 @@ function replaceTemplates(){
     $(function(){
         $("header-template").load("./templates/header-template.html");
         $("course-holder-template").load("./templates/course-holder-template.html");
-        $("footer-template").load("./templates/footer-template.html");
+        $("footer-template").load("./templates/footer-template.html", onLoadEndJQuery);
     });
     // is this even sensible? mi i scared... :fearful:
-    document.dispatchEvent(templatesLoaded);
+    function onLoadEndJQuery(){
+        document.dispatchEvent(templatesLoaded);
+    }
 }
 
 function postTemplates(){
+    loadProfilePicture();
+}
+
+function loadProfilePicture(){
     var profPic = document.getElementById('user-profile-image');
     var profUrl = getCookie("profileUrl");
     if (profUrl == "") {
         profUrl = "/assets/images/user_profile_default.png";
     }
-    profPic.style += "background-image: url(" + profUrl + ")";
-    profPic.classList.add(["redborder"])
-    alert(profPic);
+    // alert(profUrl);
+    profPic.style.backgroundImage = "url(" + profUrl + ")";
 }
 
 /* yoinked from w3schools */
