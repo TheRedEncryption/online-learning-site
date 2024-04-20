@@ -55,7 +55,7 @@ function loadProfilePicture() {
     var profPic = document.getElementById('user-profile-image');
     var profUrl = getCookie("profileUrl");
     if (profUrl == "") {
-        profUrl = "/assets/images/user_profile_default.png";
+        profUrl = "https://theredencryption.github.io/online-learning-site/assets/images/user_profile_default.png";
     }
     // alert(profUrl);
     profPic.style.backgroundImage = "url(" + profUrl + ")";
