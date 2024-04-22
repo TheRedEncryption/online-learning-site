@@ -49,14 +49,22 @@ async function initialCall() {
             res.prefixes.forEach((folderRef) => {
                 console.log(folderRef.name)
                 let holder = document.getElementById("course-holder-main");
-                let courseTemplate = document.createElement("div")
-                courseTemplate.classList.add("course-holder", "sillyRotate");
-                let title = document.createElement("div")
-                title.classList.add("bold");
-                title.setAttribute('data-fontsize', 20);
-                title.innerText = folderRef.name;
-                courseTemplate.appendChild(title);
-                holder.appendChild(courseTemplate)
+                let coursesDataList = document.getElementById("coursesDataList");
+                if(holder){
+                    let courseTemplate = document.createElement("div")
+                    courseTemplate.classList.add("course-holder", "sillyRotate");
+                    let title = document.createElement("div")
+                    title.classList.add("bold");
+                    title.setAttribute('data-fontsize', 20);
+                    title.innerText = folderRef.name;
+                    courseTemplate.appendChild(title);
+                    holder.appendChild(courseTemplate)
+                }
+                else if (coursesDataList){
+                    let option = document.createElement("option")
+                    option.value = folderRef.name
+                    coursesDataList.appendChild(option);
+                }
                 // All the prefixes under listRef.
                 // You may call listAll() recursively on them.
                 // listAll(folderRef)
@@ -123,10 +131,7 @@ async function initialCall() {
                 //         });
                 //     });
             });
-            res.items.forEach((itemRef) => {
-                // All the items under listRef.
-                console.log(itemRef)
-            });
+            document.getElementById("courseName").disabled=false;
         }).catch((error) => {
             // Uh-oh, an error occurred!
             console.error(error)
