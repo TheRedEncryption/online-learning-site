@@ -234,9 +234,23 @@ h1.sectionHeader {
     justify-content:center;
     align-content:center;
     height:50vh;
+    padding:8em;
+}
+
+@keyframes authHover{
+    0%{
+        transform: translateY(-0.5em) skewX(-2deg);
+    }
+    50%{
+        transform: translateY(0.5em) skewX(2deg);
+    }
+    100%{
+        transform: translateY(-0.5em) skewX(-2deg);
+    }
 }
 
 .authHolder{
+    animation: 3s ease-in 0s infinite reverse forwards running authHover;
     align-content: center;
     padding:1em;
 }
