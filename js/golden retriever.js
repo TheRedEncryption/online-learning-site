@@ -73,14 +73,21 @@ async function initialCall() {
                                                     const blob = xhr.response;
                                                     if(blob.type === "text/plain"){
                                                         let holder = document.getElementById("course-holder-main");
-                                                            let courseTemplate = document.createElement("course-holder-template")
-                                                            console.log(courseTemplate);
+
+                                                            let courseTemplate = document.createElement("div")
+                                                            courseTemplate.classList.add("course-holder", "sillyRotate");
+                                                            let title = document.createElement("div")
+                                                            title.classList.add("bold");
+                                                            title.setAttribute('data-fontsize', 20);
+                                                            title.innerText = itemRef3.parent.name;
+                                                            courseTemplate.appendChild(title);
                                                             holder.appendChild(courseTemplate)
                                                             replaceTemplates()
-                                                            document.addEventListener("templatesLoaded", ()=>{
-                                                                console.log("ANYTHING PLEASE")
-                                                                courseTemplate.firstChild.innerText = itemRef3.parent.name + "\n\n"
-                                                            }, false)
+                                                            // let courseTemplate = document.createElement("course-holder-template")
+                                                            // console.log(courseTemplate);
+                                                            // holder.appendChild(courseTemplate)
+                                                            // replaceTemplates()
+                                                            
                                                         
                                                         
                                                         // WILL USE FOR LOADING TEXT AND MP4 ONTO PAGE

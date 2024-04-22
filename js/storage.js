@@ -17,13 +17,14 @@ const uploadFileInput = document.getElementById(
 
 
 let storageRef;
+let uid;
 const auth = getAuth();
 onAuthStateChanged(auth, (user) => {
   if (user) {
     // User is signed in, see docs for a list of available properties
     // https://firebase.google.com/docs/reference/js/auth.user
-    const uid = user.uid;
-    storageRef = ref(storage, `user/${user.uid}`);
+    uid = user.uid;
+    storageRef = ref(storage, `courses`);
     // ...
   } else {
     // User is signed out
@@ -43,6 +44,10 @@ function initialCall() {
     if(!projectName.value){
       return console.error("No project name")
     }
+    let courseName = document.getElementById("courseName");
+    if(!courseName.value){
+      return console.error("No course name")
+    }
     // 'file' comes from the Blob or File API
     //return;
     // if ((!uploadFileInput.files.length || !storageRef) && (!document.getElementById("textarea").value=="")) {
@@ -51,7 +56,7 @@ function initialCall() {
     var blob = new Blob([document.getElementById("textarea").value], {type: "text/plain"});
     /*uploadFileInput.files[0].name*/
     if(uploadFileInput.files[0]){
-      uploadBytes(ref(storageRef, projectName.value + "/" + uploadFileInput.files[0].name), uploadFileInput.files[0]).then((snapshot) => {
+      uploadBytes(ref(storageRef, courseName.value + "/" + uid + "/" + projectName.value + "/" + uploadFileInput.files[0].name), uploadFileInput.files[0]).then((snapshot) => {
         console.log('Uploaded a blob or file!');
         document.getElementById("badtoast").innerText += "File success"
       }).catch((error) => {
@@ -60,7 +65,7 @@ function initialCall() {
       })
     }
     if(blob){
-      uploadBytes(ref(storageRef, projectName.value + "/" + "markdownText.txt"), blob).then((snapshot) => {
+      uploadBytes(ref(storageRef, courseName.value + "/" + uid + "/" + projectName.value + "/" + "markdownText.txt"), blob).then((snapshot) => {
         console.log('Uploaded the markdown blob or file!');
         document.getElementById("badtoast").innerText += "Markdown success"
       }).catch((error) => {
