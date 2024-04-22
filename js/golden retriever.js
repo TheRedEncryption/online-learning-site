@@ -38,7 +38,7 @@ async function initialCall() {
 
     // Create a reference with an initial file path and name
     const storage = getStorage();
-    const listRef = ref(storage, 'user');
+    const listRef = ref(storage, 'courses');
 
 
     console.log(listRef)
@@ -47,76 +47,91 @@ async function initialCall() {
             // console.log(res.items)
             // console.log(res.prefixes)
             res.prefixes.forEach((folderRef) => {
+                console.log(folderRef.name)
+                let holder = document.getElementById("course-holder-main");
+                let coursesDataList = document.getElementById("coursesDataList");
+                if(holder){
+                    let courseTemplate = document.createElement("div")
+                    courseTemplate.classList.add("course-holder", "sillyRotate");
+                    let title = document.createElement("div")
+                    title.classList.add("bold");
+                    title.setAttribute('data-fontsize', 20);
+                    title.innerText = folderRef.name;
+                    courseTemplate.appendChild(title);
+                    holder.appendChild(courseTemplate)
+                }
+                else if (coursesDataList){
+                    let option = document.createElement("option")
+                    option.value = folderRef.name
+                    coursesDataList.appendChild(option);
+                }
                 // All the prefixes under listRef.
                 // You may call listAll() recursively on them.
-                listAll(folderRef)
-                    .then((res2) => {
-                        res2.prefixes.forEach((folderRef2) => {
-                            // All the prefixes under listRef.
-                            // You may call listAll() recursively on them.
-                            listAll(folderRef2)
-                                .then((res3) => {
-                                    console.log(res3);
-                                    res3.items.forEach((itemRef3) => {
-                                        // All the items under listRef.
-                                        console.log(itemRef3)
-                                        // XMLHttpRequest
-                                        getDownloadURL(itemRef3)
-                                            .then((url) => {
-                                                // `url` is the download URL for 'images/stars.jpg'
-                                                console.log(url);
+                // listAll(folderRef)
+                //     .then((res2) => {
+                //         res2.prefixes.forEach((folderRef2) => {
+                //             // All the prefixes under listRef.
+                //             // You may call listAll() recursively on them.
+                //             listAll(folderRef2)
+                //                 .then((res3) => {
+                //                     console.log(res3);
+                //                     res3.items.forEach((itemRef3) => {
+                //                         // All the items under listRef.
+                //                         console.log(itemRef3)
+                //                         // XMLHttpRequest
+                //                         getDownloadURL(itemRef3)
+                //                             .then((url) => {
+                //                                 // `url` is the download URL for 'images/stars.jpg'
+                //                                 console.log(url);
 
-                                                // This can be downloaded directly:
-                                                const xhr = new XMLHttpRequest();
-                                                xhr.responseType = 'blob';
-                                                xhr.onload = (event) => {
-                                                    const blob = xhr.response;
-                                                    if(blob.type === "text/plain"){
-                                                        let holder = document.getElementById("course-holder-main");
+                //                                 // This can be downloaded directly:
+                //                                 const xhr = new XMLHttpRequest();
+                //                                 xhr.responseType = 'blob';
+                //                                 xhr.onload = (event) => {
+                //                                     const blob = xhr.response;
+                //                                     if (blob.type === "text/plain") {
+                //                                         let holder = document.getElementById("course-holder-main");
 
-                                                            let courseTemplate = document.createElement("div")
-                                                            courseTemplate.classList.add("course-holder", "sillyRotate");
-                                                            let title = document.createElement("div")
-                                                            title.classList.add("bold");
-                                                            title.setAttribute('data-fontsize', 20);
-                                                            title.innerText = itemRef3.parent.name;
-                                                            courseTemplate.appendChild(title);
-                                                            holder.appendChild(courseTemplate)
-                                                            replaceTemplates()
-                                                            // let courseTemplate = document.createElement("course-holder-template")
-                                                            // console.log(courseTemplate);
-                                                            // holder.appendChild(courseTemplate)
-                                                            // replaceTemplates()
-                                                            
-                                                        
-                                                        
-                                                        // WILL USE FOR LOADING TEXT AND MP4 ONTO PAGE
-                                                        // blob.text().then((givemetheshit)=>{
-                                                        //     document.getElementById("temptextplacehere").innerHTML += marked.parse(givemetheshit) + "\n\n";
-                                                        // })
-                                                    }
-                                                };
-                                                xhr.open('GET', url);
-                                                xhr.send();
+                //                                         let courseTemplate = document.createElement("div")
+                //                                         courseTemplate.classList.add("course-holder", "sillyRotate");
+                //                                         let title = document.createElement("div")
+                //                                         title.classList.add("bold");
+                //                                         title.setAttribute('data-fontsize', 20);
+                //                                         title.innerText = itemRef3.parent.name;
+                //                                         courseTemplate.appendChild(title);
+                //                                         holder.appendChild(courseTemplate)
+                //                                         replaceTemplates()
+                //                                         // let courseTemplate = document.createElement("course-holder-template")
+                //                                         // console.log(courseTemplate);
+                //                                         // holder.appendChild(courseTemplate)
+                //                                         // replaceTemplates()
 
 
 
-                                                // // Or inserted into an <img> element
-                                                // const img = document.getElementById('myimg');
-                                                // img.setAttribute('src', url);
-                                            })
-                                            .catch((error) => {
-                                                // Handle any errors
-                                            });
-                                    });
-                                });
-                        });
-                    });
+                //                                         // WILL USE FOR LOADING TEXT AND MP4 ONTO PAGE
+                //                                         // blob.text().then((givemetheshit)=>{
+                //                                         //     document.getElementById("temptextplacehere").innerHTML += marked.parse(givemetheshit) + "\n\n";
+                //                                         // })
+                //                                     }
+                //                                 };
+                //                                 xhr.open('GET', url);
+                //                                 xhr.send();
+
+
+
+                //                                 // // Or inserted into an <img> element
+                //                                 // const img = document.getElementById('myimg');
+                //                                 // img.setAttribute('src', url);
+                //                             })
+                //                             .catch((error) => {
+                //                                 // Handle any errors
+                //                             });
+                //                     });
+                //                 });
+                //         });
+                //     });
             });
-            res.items.forEach((itemRef) => {
-                // All the items under listRef.
-                console.log(itemRef)
-            });
+            document.getElementById("courseName").disabled=false;
         }).catch((error) => {
             // Uh-oh, an error occurred!
             console.error(error)
