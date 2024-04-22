@@ -1,5 +1,6 @@
 import { getStorage, ref, listAll, list, getDownloadURL, getBytes } from "https://www.gstatic.com/firebasejs/10.8.1/firebase-storage.js";
 import { getAuth, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/10.8.1/firebase-auth.js";
+import { marked } from "https://cdn.jsdelivr.net/npm/marked/lib/marked.esm.js";
 
 // Get a reference to the storage service, which is used to create references in your storage bucket
 
@@ -70,13 +71,32 @@ async function initialCall() {
                                                 xhr.responseType = 'blob';
                                                 xhr.onload = (event) => {
                                                     const blob = xhr.response;
+                                                    if(blob.type === "text/plain"){
+                                                        let holder = document.getElementById("course-holder-main");
+                                                            let courseTemplate = document.createElement("course-holder-template")
+                                                            console.log(courseTemplate);
+                                                            holder.appendChild(courseTemplate)
+                                                            replaceTemplates()
+                                                            document.addEventListener("templatesLoaded", ()=>{
+                                                                console.log("ANYTHING PLEASE")
+                                                                courseTemplate.firstChild.innerText = itemRef3.parent.name + "\n\n"
+                                                            }, false)
+                                                        
+                                                        
+                                                        // WILL USE FOR LOADING TEXT AND MP4 ONTO PAGE
+                                                        // blob.text().then((givemetheshit)=>{
+                                                        //     document.getElementById("temptextplacehere").innerHTML += marked.parse(givemetheshit) + "\n\n";
+                                                        // })
+                                                    }
                                                 };
                                                 xhr.open('GET', url);
                                                 xhr.send();
 
-                                                // Or inserted into an <img> element
-                                                const img = document.getElementById('myimg');
-                                                img.setAttribute('src', url);
+
+
+                                                // // Or inserted into an <img> element
+                                                // const img = document.getElementById('myimg');
+                                                // img.setAttribute('src', url);
                                             })
                                             .catch((error) => {
                                                 // Handle any errors
