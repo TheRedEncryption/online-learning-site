@@ -46,20 +46,26 @@ async function initialCall() {
         .then((res) => {
             // console.log(res.items)
             // console.log(res.prefixes)
+            let counter = -1;
             res.prefixes.forEach((folderRef) => {
-                alert(folderRef.name)
+                counter += 1;
                 let holder = document.getElementById("course-holder-main");
                 let coursesDataList = document.getElementById("coursesDataList");
                 if(holder){
-                    // let courseTemplate = document.createElement("div")
-                    // courseTemplate.classList.add("course-holder", "sillyRotate");
-                    // let title = document.createElement("div")
+                    holder.innerHTML += "<div class='course-template-slot' data-coursename='" + folderRef.name + "'></div>";
                     // title.classList.add("bold");
                     // title.setAttribute('data-fontsize', 20);
                     // title.innerText = folderRef.name;
                     // courseTemplate.appendChild(title);
                     // holder.appendChild(courseTemplate)
-                    $("#course-holder-main").load("./templates/course-holder-template.html");
+                    $(".course-template-slot").load("./templates/course-holder-template.html", function(loadedTemplate){
+                        let currentSlot = $(".course-template-slot")[counter];
+                        // alert($(".course-template-slot")[counter]);
+                        if(true){
+                            alert(currentSlot.getElementsByClassName("course-title")[0].innerHTML);
+                            currentSlot.getElementsByClassName("course-title")[0].innerHTML = folderRef.name;
+                        }
+                    });
                 }
                 else if (coursesDataList){
                     let option = document.createElement("option")
