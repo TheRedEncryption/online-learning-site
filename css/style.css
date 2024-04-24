@@ -292,3 +292,18 @@ h1.sectionHeader {
     background-image: url('/assets/images/user_profile_default.png');
     background-size: 48px 48px;
 }
+
+.texting{
+    position: fixed;
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transform: translateY(-13em);
+}
+
+.textingInput{
+    width: 50vw;
+    border-radius: 10px;
+    text-indent: 0.4em;
+}
