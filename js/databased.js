@@ -86,7 +86,6 @@ window.addEventListener("load", () => {
         }
         centerBody.scroll({
             top: 1000000000,
-            left: 100,
             behavior: "smooth",
           });
         console.log(data);
