@@ -47,18 +47,19 @@ async function initialCall() {
             // console.log(res.items)
             // console.log(res.prefixes)
             res.prefixes.forEach((folderRef) => {
-                console.log(folderRef.name)
+                alert(folderRef.name)
                 let holder = document.getElementById("course-holder-main");
                 let coursesDataList = document.getElementById("coursesDataList");
                 if(holder){
-                    let courseTemplate = document.createElement("div")
-                    courseTemplate.classList.add("course-holder", "sillyRotate");
-                    let title = document.createElement("div")
-                    title.classList.add("bold");
-                    title.setAttribute('data-fontsize', 20);
-                    title.innerText = folderRef.name;
-                    courseTemplate.appendChild(title);
-                    holder.appendChild(courseTemplate)
+                    // let courseTemplate = document.createElement("div")
+                    // courseTemplate.classList.add("course-holder", "sillyRotate");
+                    // let title = document.createElement("div")
+                    // title.classList.add("bold");
+                    // title.setAttribute('data-fontsize', 20);
+                    // title.innerText = folderRef.name;
+                    // courseTemplate.appendChild(title);
+                    // holder.appendChild(courseTemplate)
+                    $("#course-holder-main").load("./templates/course-holder-template.html");
                 }
                 else if (coursesDataList){
                     let option = document.createElement("option")
