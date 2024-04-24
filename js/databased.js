@@ -43,7 +43,7 @@ window.addEventListener("load", () => {
     textingInput.addEventListener("keyup", (e) => {
         if (e.key === 'Enter') {
             if(!(/^\s+$/.test(textingInput.value))){
-                writeUserData(uid, username, textingInput.value, profile_picture)
+                writeUserData(uid, username, profanityCleaner.clean(textingInput.value, { keepFirstAndLastChar: true }), profile_picture)
             }
             textingInput.value = ""
         }
