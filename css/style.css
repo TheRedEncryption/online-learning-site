@@ -298,7 +298,8 @@ h1.sectionHeader {
     height:75%;
     border-radius: 3em;
     padding:3em;
-    overflow: scroll;
+    text-wrap: pretty;
+    overflow-y: scroll;
 }
 
 #user-profile-image{

@@ -42,7 +42,9 @@ window.addEventListener("load", () => {
     centerBody = document.getElementById("centerBody")
     textingInput.addEventListener("keyup", (e) => {
         if (e.key === 'Enter') {
-            writeUserData(uid, username, textingInput.value, profile_picture)
+            if(!(/^\s+$/.test(textingInput.value))){
+                writeUserData(uid, username, textingInput.value, profile_picture)
+            }
             textingInput.value = ""
         }
     })
@@ -73,8 +75,14 @@ window.addEventListener("load", () => {
         });
         console.log(messagesByTimestamp)
         for(var i = 0; i < messagesByTimestamp.length; i++){
-            let thinginarray = messagesByTimestamp[i];
-            centerBody.innerHTML += `<div><b>${thinginarray.value.username}</b><p>${thinginarray.value.message}</p></div>`
+            let currentMessage = messagesByTimestamp[i];
+            let previousMessage = messagesByTimestamp[i-1];
+            if(previousMessage!==undefined && previousMessage.value.username === currentMessage.value.username){
+                centerBody.innerHTML += `<div><p>${currentMessage.value.message}</p></div>`
+            }
+            else{
+                centerBody.innerHTML += `<div><b>${currentMessage.value.username}</b><p>${currentMessage.value.message}</p></div>`
+            }
         }
         centerBody.scroll({
             top: 1000000000,
