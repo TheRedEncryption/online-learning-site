@@ -76,15 +76,11 @@ window.addEventListener("load", () => {
             let thinginarray = messagesByTimestamp[i];
             centerBody.innerHTML += `<div><b>${thinginarray.value.username}</b><p>${thinginarray.value.message}</p></div>`
         }
-        // messagesByTimestamp.forEach((thinginarray)=>{
-        //     centerBody.innerHTML += `<div><b>${thinginarray.value.username}</b><p>${thinginarray.value.message}</p></div>`
-        // })
-        // for(var element of messagesByTimestamp){
-        //     // value2 = element
-        //     console.log(element);
-        //     break;
-        //     centerBody.innerHTML += `<div><b>${element.value.username}</b><p>${element.value.message}</p></div>`
-        // }
+        centerBody.scroll({
+            top: 1000000000,
+            left: 100,
+            behavior: "smooth",
+          });
         console.log(data);
         console.log(typeof (data));
     });
