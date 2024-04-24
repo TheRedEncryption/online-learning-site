@@ -38,7 +38,7 @@ function findElementWithAttribute(attributeName) {
 function replaceTemplates() {
     $(function () {
         $("header-template").load("./templates/header-template.html");
-        $("course-holder-template").load("./templates/course-holder-template.html");
+        // $("course-holder-template").load("./templates/course-holder-template.html");
         $("footer-template").load("./templates/footer-template.html", onLoadEndJQuery);
     });
     // is this even sensible? mi i scared... :fearful:

@@ -237,6 +237,7 @@ h1.sectionHeader {
     padding:8em;
 }
 
+
 @keyframes authHover{
     0%{
         transform: translateY(-0.5em) skewX(-2deg);
