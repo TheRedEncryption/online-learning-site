@@ -1,35 +1,68 @@
 import { getAuth, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/10.8.1/firebase-auth.js";
-import { getDatabase, ref, set } from "https://www.gstatic.com/firebasejs/10.8.1/firebase-database.js";
+import { getDatabase, ref, set, onValue } from "https://www.gstatic.com/firebasejs/10.8.1/firebase-database.js";
 
 const auth = getAuth();
-let uid; 
-let username; 
-let email;
+let uid;
+let username;
+// let email;
 let profile_picture;
+let textingInput;
+let centerBody;
+const db = getDatabase();
 onAuthStateChanged(auth, (user) => {
     if (user) {
         // User is signed in, see docs for a list of available properties
         uid = user.uid;
-        username = user.displayName
-        email = user.email
+        if(user.displayName){
+            username = user.displayName
+        }
+        else{
+            username = user.email;
+        }
+        // email = user.email
         profile_picture = user.photoURL
         console.log(user)
-        console.log(uid, username, email, profile_picture)
-        writeUserData(uid, username, email,profile_picture)
+        console.log(uid, username, profile_picture)
     } else {
         // User is signed out
     }
 });
+function writeUserData(userId, name, message, imageUrl) {
 
-function writeUserData(userId, name, email, imageUrl) {
-    const db = getDatabase();
-    set(ref(db, 'users/' + userId), {
+    set(ref(db, 'messages/' + userId + "/" + Date.now()), {
         username: name,
-        email: email,
+        // email: email,
+        message: message,
         profile_picture: imageUrl
     });
 }
 
-window.addEventListener("load",()=>{
-    
+window.addEventListener("load", () => {
+    textingInput = document.getElementById("textingInput")
+    centerBody = document.getElementById("centerBody")
+    textingInput.addEventListener("keyup", (e) => {
+        if (e.key === 'Enter') {
+            writeUserData(uid, username, textingInput.value, profile_picture)
+            textingInput.value = ""
+        }
+    })
+    const messagesRef = ref(db, 'messages/');
+    onValue(messagesRef, (snapshot) => {
+        const data = snapshot.val();
+        centerBody.innerHTML=""
+        for (const [key, value] of Object.entries(data)) {
+            console.log(`key1 ${key}: ${value}`);
+            for (const [key2, value2] of Object.entries(value)) {
+                console.log(`key2 ${key2}: ${value2}`);
+                console.log(`MESSAGE ${value2.message}`);
+                centerBody.innerHTML += `<div><b>${value2.username}</b><p>${value2.message}</p></div>`
+                // for (const [key3, value3] of Object.entries(value2)) {
+                //     console.log(`key3 ${key3}: ${value3}`);
+
+                // }
+            }
+        }
+        console.log(data);
+        console.log(typeof (data));
+    });
 })
