@@ -24,8 +24,8 @@ onAuthStateChanged(auth, (user) => {
         }
         // email = user.email
         profile_picture = user.photoURL
-        console.log(user)
-        console.log(uid, username, profile_picture)
+        // console.log(user)
+        // console.log(uid, username, profile_picture)
     } else {
         // User is signed out
     }
@@ -47,7 +47,7 @@ window.addEventListener("load", () => {
     textingInput.addEventListener("keyup", (e) => {
         if (e.key === 'Enter') {
             if (!(/^\s+$/.test(textingInput.value))) {
-                textingInput.value = textingInput.value.replace("<", "");
+                textingInput.value = textingInput.value.replaceAll("<", "");
                 textingInput.value = DOMPurify.sanitize(marked.parse(profanityCleaner.clean(textingInput.value, { keepFirstAndLastChar: true })))
                 writeUserData(uid, username, textingInput.value, profile_picture)
             }
@@ -60,15 +60,14 @@ window.addEventListener("load", () => {
         centerBody.innerHTML = ""
         let messagesByTimestamp = [];
         for (const [key, value] of Object.entries(data)) {
-            console.log(`key1 ${key}: ${value}`);
             for (const [key2, value2] of Object.entries(value)) {
-                console.log(`key2 ${key2}: ${value2}`);
-                console.log(value2);
+                // console.log(`key2 ${key2}: ${value2}`);
+                // console.log(value2);
                 messagesByTimestamp.push({
                     timestamp: key2,
                     value: value2
                 })
-                console.log(`MESSAGE ${value2.message}`);
+                // console.log(`MESSAGE ${value2.message}`);
                 // centerBody.innerHTML += `<div><b>${value2.username}</b><p>${value2.message}</p></div>`
             }
         }
@@ -80,17 +79,16 @@ window.addEventListener("load", () => {
             if (keyA > keyB) return 1;
             return 0;
         });
-        console.log(messagesByTimestamp)
+        // console.log(messagesByTimestamp)
         let lastHeaderTime = 0;
         for (var i = 0; i < messagesByTimestamp.length; i++) {
             let currentMessage = messagesByTimestamp[i];
             let previousMessage = messagesByTimestamp[i - 1];
             lastHeaderTime = currentMessage.timestamp
-            let temp = currentMessage.value.message.match(/ https ?: \/\/(www\.)?[-a-zA-Z0-9@:%._\+~#=]{1,256}\.[a-zA-Z0-9()]{1,6}\b([-a-zA-Z0-9()@:%_\+.~#?&//=]*)/);
-            console.error("https://www.w3schools.com/tags/tag_a.asp".match(/ https ?: \/\/(www\.)?[-a-zA-Z0-9@:%._\+~#=]{1,256}\.[a-zA-Z0-9()]{1,6}\b([-a-zA-Z0-9()@:%_\+.~#?&//=]*)/))
-            console.error(currentMessage.value.message)
-            console.error(temp)
+            let temp = currentMessage.value.message.match(/https?:\/\/(www\.)?[-a-zA-Z0-9@:%._\+~#=]{1,256}\.[a-zA-Z0-9()]{1,6}\b([-a-zA-Z0-9()@:%_\+.~#?&//=]*)/);
             if(temp){
+                // console.error(temp[0]);
+                currentMessage.value.message = currentMessage.value.message.replace(temp[0], prepareFrame(temp[0]).outerHTML)
             }
             // var request;
             // if (window.XMLHttpRequest)
@@ -103,21 +101,18 @@ window.addEventListener("load", () => {
             // if (request.status === 404) {
             //     //alert("The page you are trying to reach is not available.");
             // }
-
-
+            let timedate = new Date(+currentMessage.timestamp);
             if (previousMessage !== undefined && previousMessage.value.username === currentMessage.value.username && Math.abs(lastHeaderTime - currentMessage.timestamp) < 20 * 60 * 1000) {
-                centerBody.innerHTML += `<div><p>${currentMessage.value.message}</p></div>`
+                centerBody.innerHTML += `<div><div class="timeMessageContainer"><p class="timeMessageColumn actualTime">${(""+timedate.getHours()%12).padStart(2,"0")}:${(""+timedate.getMinutes()).padStart(2,"0")}:${(""+timedate.getSeconds()).padStart(2,"0")}</p>&nbsp<p class="timeMessageColumn">${currentMessage.value.message}</p></div></div>`
             }
             else {
-                centerBody.innerHTML += `<div><div class="messageHeader"><img width="${pfpWidth}" class="circleBorder" src="${currentMessage.value.profile_picture}"></img>&nbsp<b>${currentMessage.value.username}</b></div><p>${currentMessage.value.message}</p></div>`
+                centerBody.innerHTML += `<div><div class="messageHeader"><img width="${pfpWidth}" class="circleBorder" src="${currentMessage.value.profile_picture}"></img>&nbsp<b>${currentMessage.value.username}</b></div><div class="timeMessageContainer"><p class="timeMessageColumn actualTime">${(""+timedate.getHours()%12).padStart(2,"0")}:${(""+timedate.getMinutes()).padStart(2,"0")}:${(""+timedate.getSeconds()).padStart(2,"0")}</p>&nbsp<p>${currentMessage.value.message}</p></div></div>`
             }
         }
         centerBody.scroll({
             top: 1000000000,
             behavior: "smooth",
         });
-        console.log(data);
-        console.log(typeof (data));
     });
 })
 
