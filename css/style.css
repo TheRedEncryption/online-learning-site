@@ -327,3 +327,13 @@ h1.sectionHeader {
     font-size: 24px;
     margin-bottom: 3em;
 }
+
+.messageHeader {
+    display: flex;
+    justify-content: left;
+    align-items: center
+}
+
+.circleBorder{
+    border-radius: 50%;
+}

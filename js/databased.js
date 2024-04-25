@@ -9,6 +9,7 @@ let username;
 let profile_picture;
 let textingInput;
 let centerBody;
+let pfpWidth = "30px";
 const db = getDatabase();
 onAuthStateChanged(auth, (user) => {
     if (user) {
@@ -59,6 +60,7 @@ window.addEventListener("load", () => {
             console.log(`key1 ${key}: ${value}`);
             for (const [key2, value2] of Object.entries(value)) {
                 console.log(`key2 ${key2}: ${value2}`);
+                // console.log(value2);
                 messagesByTimestamp.push({
                     timestamp: key2,
                     value: value2
@@ -76,14 +78,16 @@ window.addEventListener("load", () => {
             return 0;
         });
         console.log(messagesByTimestamp)
+        let lastHeaderTime = 0;
         for(var i = 0; i < messagesByTimestamp.length; i++){
             let currentMessage = messagesByTimestamp[i];
             let previousMessage = messagesByTimestamp[i-1];
-            if(previousMessage!==undefined && previousMessage.value.username === currentMessage.value.username){
+            if(previousMessage!==undefined && previousMessage.value.username === currentMessage.value.username && Math.abs(lastHeaderTime-currentMessage.timestamp)< 20 * 60 * 1000){
                 centerBody.innerHTML += `<div><p>${currentMessage.value.message}</p></div>`
             }
             else{
-                centerBody.innerHTML += `<div><b>${currentMessage.value.username}</b><p>${currentMessage.value.message}</p></div>`
+                lastHeaderTime = currentMessage.timestamp
+                centerBody.innerHTML += `<div><div class="messageHeader"><img width="${pfpWidth}" class="circleBorder" src="${currentMessage.value.profile_picture}"></img><b>&nbsp${currentMessage.value.username}</b></div><p>${currentMessage.value.message}</p></div>`
             }
         }
         centerBody.scroll({
