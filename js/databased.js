@@ -47,8 +47,8 @@ window.addEventListener("load", () => {
     textingInput.addEventListener("keyup", (e) => {
         if (e.key === 'Enter') {
             if (!(/^\s+$/.test(textingInput.value))) {
-                textingInput.value = DOMPurify.sanitize(marked.parse(profanityCleaner.clean(textingInput.value, { keepFirstAndLastChar: true })))
                 textingInput.value = textingInput.value.replace("<", "");
+                textingInput.value = DOMPurify.sanitize(marked.parse(profanityCleaner.clean(textingInput.value, { keepFirstAndLastChar: true })))
                 writeUserData(uid, username, textingInput.value, profile_picture)
             }
             textingInput.value = ""
