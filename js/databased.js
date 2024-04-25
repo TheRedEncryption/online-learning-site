@@ -87,23 +87,22 @@ window.addEventListener("load", () => {
             let previousMessage = messagesByTimestamp[i - 1];
             lastHeaderTime = currentMessage.timestamp
             let temp = currentMessage.value.message.match(/ https ?: \/\/(www\.)?[-a-zA-Z0-9@:%._\+~#=]{1,256}\.[a-zA-Z0-9()]{1,6}\b([-a-zA-Z0-9()@:%_\+.~#?&//=]*)/);
+            console.error("https://www.w3schools.com/tags/tag_a.asp".match(/ https ?: \/\/(www\.)?[-a-zA-Z0-9@:%._\+~#=]{1,256}\.[a-zA-Z0-9()]{1,6}\b([-a-zA-Z0-9()@:%_\+.~#?&//=]*)/))
+            console.error(currentMessage.value.message)
+            console.error(temp)
             if(temp){
-
             }
-            if (matcher.find()) {
-                System.out.println(matcher.group(1));
-            }
-            var request;
-            if (window.XMLHttpRequest)
-                request = new XMLHttpRequest();
-            else
-                request = new ActiveXObject("Microsoft.XMLHTTP");
-            request.open('GET', 'http://www.mozilla.org', false);
-            request.send(); // there will be a 'pause' here until the response to come.
+            // var request;
+            // if (window.XMLHttpRequest)
+            //     request = new XMLHttpRequest();
+            // else
+            //     request = new ActiveXObject("Microsoft.XMLHTTP");
+            // request.open('GET', 'https://www.mozilla.org', false);
+            // request.send(); // there will be a 'pause' here until the response to come.
             // the object request will be actually modified
-            if (request.status === 404) {
-                //alert("The page you are trying to reach is not available.");
-            }
+            // if (request.status === 404) {
+            //     //alert("The page you are trying to reach is not available.");
+            // }
 
 
             if (previousMessage !== undefined && previousMessage.value.username === currentMessage.value.username && Math.abs(lastHeaderTime - currentMessage.timestamp) < 20 * 60 * 1000) {
