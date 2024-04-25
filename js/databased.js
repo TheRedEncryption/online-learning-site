@@ -1,5 +1,6 @@
 import { getAuth, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/10.8.1/firebase-auth.js";
 import { getDatabase, ref, set, onValue } from "https://www.gstatic.com/firebasejs/10.8.1/firebase-database.js";
+import { marked } from "https://cdn.jsdelivr.net/npm/marked/lib/marked.esm.js";
 
 const auth = getAuth();
 let uid;
@@ -43,7 +44,8 @@ window.addEventListener("load", () => {
     textingInput.addEventListener("keyup", (e) => {
         if (e.key === 'Enter') {
             if(!(/^\s+$/.test(textingInput.value))){
-                writeUserData(uid, username, profanityCleaner.clean(textingInput.value, { keepFirstAndLastChar: true }), profile_picture)
+                textingInput.value = DOMPurify.sanitize(marked.parse(profanityCleaner.clean(textingInput.value, { keepFirstAndLastChar: true })))
+                writeUserData(uid, username, textingInput.value, profile_picture)
             }
             textingInput.value = ""
         }
