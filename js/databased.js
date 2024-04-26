@@ -10,6 +10,7 @@ let username;
 let profile_picture;
 let textingInput;
 let centerBody;
+const extraBadWords = ["skibidi", "gyatt", "kill yourself", "cameraman"]
 let pfpWidth = "30px";
 const db = getDatabase();
 onAuthStateChanged(auth, (user) => {
@@ -52,7 +53,7 @@ window.addEventListener("load", () => {
             if (!(/^\s+$/.test(textingInput.value))) {
                 textingInput.value = textingInput.value.replaceAll("<", "");
                 let temp = textingInput.value.match(/https?:\/\/(www\.)?[-a-zA-Z0-9@:%._\+~#=]{1,256}\.[a-zA-Z0-9()]{1,6}\b([-a-zA-Z0-9()@:%_\+,.~#?&//=]*)/);
-                textingInput.value = DOMPurify.sanitize(profanityCleaner.clean(textingInput.value, { keepFirstAndLastChar: true }))
+                textingInput.value = DOMPurify.sanitize(profanityCleaner.clean(textingInput.value, { keepFirstAndLastChar: true, customBadWords: extraBadWords}))
                 // if(temp){
                 //     // console.error(temp[0]);
                 //     let temp2=prepareFrame(temp[0]);
