@@ -45,7 +45,7 @@ onAuthStateChanged(auth, (user) => {
 });
 function writeUserData(userId, name, message, imageUrl) {
     if(!imageUrl){
-        imageUrl = "../assets/images/user_profile_default.png"
+        imageUrl = "/online-learning-site/assets/images/user_profile_default.png"
     }
 
     set(ref(db, 'messages/' + userId + "/" + Date.now()), {
