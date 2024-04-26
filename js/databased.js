@@ -17,6 +17,11 @@ const emoteLinks = [
     "yippee.jpg",
     "yippee_bounce.gif"
 ]
+const emoteNames = [];
+emoteLinks.forEach((element)=>{
+    emoteNames.push(element.substring(0,element.indexOf(".")))
+})
+console.log(emoteNames)
 
 let pfpWidth = "30px";
 const db = getDatabase();
@@ -55,6 +60,12 @@ function writeUserData(userId, name, message, imageUrl) {
 window.addEventListener("load", () => {
     textingInput = document.getElementById("textingInput")
     centerBody = document.getElementById("centerBody")
+    textingInput.addEventListener("focus",()=>{
+        textingInput.setAttribute("placeholder", ":"+emoteNames.join(": :") + ":")
+    })
+    textingInput.addEventListener("focusout",()=>{
+        textingInput.setAttribute("placeholder","");
+    })
     textingInput.addEventListener("keyup", (e) => {
         if (e.key === 'Enter') {
             if (!(/^\s+$/.test(textingInput.value))) {
