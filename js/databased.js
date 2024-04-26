@@ -54,6 +54,16 @@ window.addEventListener("load", () => {
                 textingInput.value = textingInput.value.replaceAll("<", "");
                 let temp = textingInput.value.match(/https?:\/\/(www\.)?[-a-zA-Z0-9@:%._\+~#=]{1,256}\.[a-zA-Z0-9()]{1,6}\b([-a-zA-Z0-9()@:%_\+,.~#?&//=]*)/);
                 textingInput.value = DOMPurify.sanitize(profanityCleaner.clean(textingInput.value, { keepFirstAndLastChar: true, customBadWords: extraBadWords}))
+                let emotes = textingInput.value.match(/:.+?:/g)
+                if(emotes){
+                    // console.log(emotes)
+                    for(var i = 0; i < emotes.length; i++){
+                        emotes[i] = `<img src="/emotes/${emotes[i].replaceAll(":","")}.jpg" width="${pfpWidth}"></img>`
+                        // console.log(emotes[i])
+                        textingInput.value = textingInput.value.replace(/:.+?:/, emotes[i])
+                        // console.log(currentMessage.value.message)
+                    }
+                }
                 textingInput.value = marked.parse(textingInput.value);
                 writeUserData(uid, username, textingInput.value, profile_picture)
             }
@@ -94,15 +104,6 @@ window.addEventListener("load", () => {
             if(!currentMessage.value.profile_picture){
                 currentMessage.value.profile_picture = "../assets/images/user_profile_default.png"
             }
-            let emotes = currentMessage.value.message.match(/:.+?:/g)
-            // if(emotes){
-            //     for(var i = 0; i < emotes.length; i++){
-            //         emotes[i] = `<img src="../emotes/${emotes[i].replaceAll(":","")}.jpg" width="${pfpWidth}"></img>`
-            //         console.log(emotes[i])
-            //         currentMessage.value.message = currentMessage.value.message.replace(/:.+?:/, emotes[i])
-            //         console.log(currentMessage.value.message)
-            //     }
-            // }
             let timedate = new Date(+currentMessage.timestamp);
             if (previousMessage !== undefined && previousMessage.value.username === currentMessage.value.username && Math.abs(lastHeaderTime - currentMessage.timestamp) < 20 * 60 * 1000) {
                 centerBody.innerHTML += `<div><div class="timeMessageContainer"><p class="timeMessageColumn actualTime">${(""+timedate.getHours()%12).padStart(2,"0")}:${(""+timedate.getMinutes()).padStart(2,"0")}:${(""+timedate.getSeconds()).padStart(2,"0")}</p><div>&nbsp</div><div class="timeMessageColumn theMessageItself">${currentMessage.value.message}</div></div></div>`
