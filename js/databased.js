@@ -68,7 +68,14 @@ window.addEventListener("load", () => {
     })
     textingInput.addEventListener("keyup", (e) => {
         if (e.key === 'Enter') {
-            if (!(/^\s+$/.test(textingInput.value))) {
+            if (!(textingInput.value.trim()=="")) {
+                if(textingInput.value.length>1000){
+                    textingInput.classList.add("redshake")
+                    setTimeout(() => {
+                        textingInput.classList.remove("redshake")
+                    }, 1000);
+                    return console.error("Too long")
+                }
                 textingInput.value = textingInput.value.replaceAll("<", "");
                 let temp = textingInput.value.match(/https?:\/\/(www\.)?[-a-zA-Z0-9@:%._\+~#=]{1,256}\.[a-zA-Z0-9()]{1,6}\b([-a-zA-Z0-9()@:%_\+,.~#?&//=]*)/);
                 textingInput.value = DOMPurify.sanitize(profanityCleaner.clean(textingInput.value, { keepFirstAndLastChar: true, customBadWords: extraBadWords}))

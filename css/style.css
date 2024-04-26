@@ -334,6 +334,7 @@ h1.sectionHeader {
     text-indent: 0.4em;
     font-size: 24px;
     margin-bottom: 3em;
+    transition: border 0.2s ease, background-color 0.2s ease;
 }
 
 .messageHeader {
@@ -374,4 +375,9 @@ h1.sectionHeader {
 
 .fullWidth{
     width: 100%;
+}
+
+.redshake{
+    border: solid rgba(255, 0, 0, 0.75) 4px;
+    background-color: rgb(255, 128, 128);    
 }
