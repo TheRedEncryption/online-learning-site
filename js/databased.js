@@ -10,7 +10,14 @@ let username;
 let profile_picture;
 let textingInput;
 let centerBody;
-const extraBadWords = ["skibidi", "gyatt", "kill yourself", "cameraman"]
+const extraBadWords = ["skibidi", "gyatt", "kill yourself", "cameraman", "helldivers"]
+
+const emoteLinks = [
+    "kitty.png", 
+    "yippee.jpg",
+    "yippee_bounce.gif"
+]
+
 let pfpWidth = "30px";
 const db = getDatabase();
 onAuthStateChanged(auth, (user) => {
@@ -58,10 +65,13 @@ window.addEventListener("load", () => {
                 if(emotes){
                     // console.log(emotes)
                     for(var i = 0; i < emotes.length; i++){
-                        emotes[i] = `<img src="/online-learning-site/emotes/${emotes[i].replaceAll(":","")}.jpg" width="${pfpWidth}"></img>`
-                        // console.log(emotes[i])
-                        textingInput.value = textingInput.value.replace(/:.+?:/, emotes[i])
-                        // console.log(currentMessage.value.message)
+                        let emoteURL = emoteLinks.find((element) => element.includes(emotes[i].replaceAll(":","")))
+                        if(emoteURL){
+                            emotes[i] = `<img src="/online-learning-site/emotes/${emoteURL}" width="${pfpWidth}"></img>`
+                            // console.log(emotes[i])
+                            textingInput.value = textingInput.value.replace(/:.+?:/, emotes[i])
+                            // console.log(currentMessage.value.message)
+                        }
                     }
                 }
                 textingInput.value = marked.parse(textingInput.value);
