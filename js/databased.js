@@ -54,14 +54,6 @@ window.addEventListener("load", () => {
                 textingInput.value = textingInput.value.replaceAll("<", "");
                 let temp = textingInput.value.match(/https?:\/\/(www\.)?[-a-zA-Z0-9@:%._\+~#=]{1,256}\.[a-zA-Z0-9()]{1,6}\b([-a-zA-Z0-9()@:%_\+,.~#?&//=]*)/);
                 textingInput.value = DOMPurify.sanitize(profanityCleaner.clean(textingInput.value, { keepFirstAndLastChar: true, customBadWords: extraBadWords}))
-                // if(temp){
-                //     // console.error(temp[0]);
-                //     let temp2=prepareFrame(temp[0]);
-                //     temp2.classList.add("fullWidth");
-                //     console.log(temp2)
-                //     textingInput.value = textingInput.value.replace(temp[0], temp2.outerHTML)
-                //     console.log(textingInput.value)
-                // }
                 textingInput.value = marked.parse(textingInput.value);
                 writeUserData(uid, username, textingInput.value, profile_picture)
             }
@@ -101,6 +93,15 @@ window.addEventListener("load", () => {
             lastHeaderTime = currentMessage.timestamp
             if(!currentMessage.value.profile_picture){
                 currentMessage.value.profile_picture = "../assets/images/user_profile_default.png"
+            }
+            let emotes = currentMessage.value.message.match(/:.+?:/g)
+            if(emotes){
+                for(var i = 0; i < emotes.length; i++){
+                    emotes[i] = `<img src="../emotes/${emotes[i].replaceAll(":","")}.jpg" width="${pfpWidth}"></img>`
+                    console.log(emotes[i])
+                    currentMessage.value.message = currentMessage.value.message.replace(/:.+?:/, emotes[i])
+                    console.log(currentMessage.value.message)
+                }
             }
             let timedate = new Date(+currentMessage.timestamp);
             if (previousMessage !== undefined && previousMessage.value.username === currentMessage.value.username && Math.abs(lastHeaderTime - currentMessage.timestamp) < 20 * 60 * 1000) {
