@@ -31,6 +31,9 @@ onAuthStateChanged(auth, (user) => {
     }
 });
 function writeUserData(userId, name, message, imageUrl) {
+    if(!imageUrl){
+        imageUrl = "../assets/images/user_profile_default.png"
+    }
 
     set(ref(db, 'messages/' + userId + "/" + Date.now()), {
         uid: userId,
@@ -101,6 +104,9 @@ window.addEventListener("load", () => {
             // if (request.status === 404) {
             //     //alert("The page you are trying to reach is not available.");
             // }
+            if(!currentMessage.value.profile_picture){
+                currentMessage.value.profile_picture = "../assets/images/user_profile_default.png"
+            }
             let timedate = new Date(+currentMessage.timestamp);
             if (previousMessage !== undefined && previousMessage.value.username === currentMessage.value.username && Math.abs(lastHeaderTime - currentMessage.timestamp) < 20 * 60 * 1000) {
                 centerBody.innerHTML += `<div><div class="timeMessageContainer"><p class="timeMessageColumn actualTime">${(""+timedate.getHours()%12).padStart(2,"0")}:${(""+timedate.getMinutes()).padStart(2,"0")}:${(""+timedate.getSeconds()).padStart(2,"0")}</p>&nbsp<p class="timeMessageColumn">${currentMessage.value.message}</p></div></div>`
