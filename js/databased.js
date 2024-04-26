@@ -95,14 +95,14 @@ window.addEventListener("load", () => {
                 currentMessage.value.profile_picture = "../assets/images/user_profile_default.png"
             }
             let emotes = currentMessage.value.message.match(/:.+?:/g)
-            if(emotes){
-                for(var i = 0; i < emotes.length; i++){
-                    emotes[i] = `<img src="../emotes/${emotes[i].replaceAll(":","")}.jpg" width="${pfpWidth}"></img>`
-                    console.log(emotes[i])
-                    currentMessage.value.message = currentMessage.value.message.replace(/:.+?:/, emotes[i])
-                    console.log(currentMessage.value.message)
-                }
-            }
+            // if(emotes){
+            //     for(var i = 0; i < emotes.length; i++){
+            //         emotes[i] = `<img src="../emotes/${emotes[i].replaceAll(":","")}.jpg" width="${pfpWidth}"></img>`
+            //         console.log(emotes[i])
+            //         currentMessage.value.message = currentMessage.value.message.replace(/:.+?:/, emotes[i])
+            //         console.log(currentMessage.value.message)
+            //     }
+            // }
             let timedate = new Date(+currentMessage.timestamp);
             if (previousMessage !== undefined && previousMessage.value.username === currentMessage.value.username && Math.abs(lastHeaderTime - currentMessage.timestamp) < 20 * 60 * 1000) {
                 centerBody.innerHTML += `<div><div class="timeMessageContainer"><p class="timeMessageColumn actualTime">${(""+timedate.getHours()%12).padStart(2,"0")}:${(""+timedate.getMinutes()).padStart(2,"0")}:${(""+timedate.getSeconds()).padStart(2,"0")}</p><div>&nbsp</div><div class="timeMessageColumn theMessageItself">${currentMessage.value.message}</div></div></div>`
