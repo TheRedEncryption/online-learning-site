@@ -58,7 +58,7 @@ window.addEventListener("load", () => {
                 if(emotes){
                     // console.log(emotes)
                     for(var i = 0; i < emotes.length; i++){
-                        emotes[i] = `<img src="/emotes/${emotes[i].replaceAll(":","")}.jpg" width="${pfpWidth}"></img>`
+                        emotes[i] = `<img src="/online-learning-site/emotes/${emotes[i].replaceAll(":","")}.jpg" width="${pfpWidth}"></img>`
                         // console.log(emotes[i])
                         textingInput.value = textingInput.value.replace(/:.+?:/, emotes[i])
                         // console.log(currentMessage.value.message)
