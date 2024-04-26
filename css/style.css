@@ -367,3 +367,11 @@ h1.sectionHeader {
     opacity: 0%;
     font-size: small;
 }
+
+.theMessageItself{
+    overflow-wrap: anywhere;
+}
+
+.fullWidth{
+    width: 100%;
+}
