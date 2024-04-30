@@ -28,15 +28,21 @@ console.log(courseTitle)
 let listRef = sRef(storage, "courses/" + courseTitle)
 console.log(listRef)
 listAll(listRef)
-.then((res) => {
-        console.log(res)
-        // console.log(res.items)
-        // console.log(res.prefixes)
-        res.prefixes.forEach((folderRef) => {
-            console.log(folderRef)
-        });
-        res.items.forEach((itemRef) => {
-            console.log(itemRef)
+.then((coursesReference) => {
+        console.log(coursesReference)
+        // console.log(coursesReference.items)
+        // console.log(coursesReference.prefixes)
+        coursesReference.prefixes.forEach((folderRef) => {
+            listAll(folderRef).then((userIDS)=>{
+                console.log("userIDS")
+                console.log(userIDS)
+                userIDS.prefixes.forEach((articleRef) => {
+                    listAll(articleRef).then((articleParts)=>{
+                        console.log("articleParts")
+                        console.log(articleParts)
+                    })
+                });
+            })
         });
     }).catch((error) => {
         // Uh-oh, an error occurred!
