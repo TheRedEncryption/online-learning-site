@@ -18,7 +18,7 @@
     Something has gone terribly wrong. Check the url, lmao. <br>
     <script>
         try {
-            document.body.innerHTML += window.location.toString().substring(window.location.origin.length);
+            document.body.innerHTML += window.location.toString().substring(window.location.origin.length + "/online-learning-site/".length);
         } catch (error) {
             alert(error);
         }
