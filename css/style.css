@@ -395,5 +395,13 @@ h1.sectionHeader {
 }
 
 .deleteButton{
-    float:right
+    float:right;
+    border-radius: 1em;
+    border: 0px;
+    font-size:0.75em;
+    opacity:50%;
+    transition: opacity 0.2s ease-out;
+}
+.deleteButton:hover{
+    opacity:100%;
 }
