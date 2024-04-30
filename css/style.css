@@ -352,7 +352,19 @@ h1.sectionHeader {
     display: flex;
     clear: both;
     align-items: center;
+    justify-content: space-between;
     text-wrap: pretty;
+}
+
+.flexContainer1{
+    display:flex;
+    align-items: center;
+    justify-content: left;
+}
+
+.flexContainer2{
+    display:flex;
+    justify-content: flex-end;
 }
 
 .timeMessageContainer p{
@@ -380,4 +392,8 @@ h1.sectionHeader {
 .redshake{
     border: solid rgba(255, 0, 0, 0.75) 4px;
     background-color: rgb(255, 128, 128);    
+}
+
+.deleteButton{
+    float:right
 }

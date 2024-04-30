@@ -106,10 +106,10 @@ window.addEventListener("load", () => {
         for (const [key, value] of Object.entries(data)) {
             for (const [key2, value2] of Object.entries(value)) {
                 // console.log(`key2 ${key2}: ${value2}`);
-                // console.log(value2);
                 messagesByTimestamp.push({
                     timestamp: key2,
-                    value: value2
+                    value: value2,
+                    userReference: key
                 })
                 // console.log(`MESSAGE ${value2.message}`);
                 // centerBody.innerHTML += `<div><b>${value2.username}</b><p>${value2.message}</p></div>`
@@ -134,11 +134,54 @@ window.addEventListener("load", () => {
             }
             let timedate = new Date(+currentMessage.timestamp);
             if (previousMessage !== undefined && previousMessage.value.username === currentMessage.value.username && Math.abs(lastHeaderTime - currentMessage.timestamp) < 20 * 60 * 1000) {
-                centerBody.innerHTML += `<div><div class="timeMessageContainer"><p class="timeMessageColumn actualTime">${(""+timedate.getHours()%12).padStart(2,"0")}:${(""+timedate.getMinutes()).padStart(2,"0")}:${(""+timedate.getSeconds()).padStart(2,"0")}</p><div>&nbsp</div><div class="timeMessageColumn theMessageItself">${currentMessage.value.message}</div></div></div>`
+                centerBody.innerHTML += `<div>
+                <div class="timeMessageContainer">
+                <div class="flexContainer1">
+                    <p class="timeMessageColumn actualTime">
+                        ${(""+timedate.getHours()%12).padStart(2,"0")}:${(""+timedate.getMinutes()).padStart(2,"0")}:${(""+timedate.getSeconds()).padStart(2,"0")}
+                    </p>
+                    <div>&nbsp</div>
+                    <div class="theMessageItself">${currentMessage.value.message}</div>
+                    <div>&nbsp</div>
+                </div>
+                <div class="flexContainer2">
+                    <div class ="deleteButtonContainer">
+                        <button class="deleteButton">Delete</button>
+                    </div>
+                </div>
+            </div>
+                </div>`
             }
             else {
-                centerBody.innerHTML += `<div><div class="messageHeader"><img width="${pfpWidth}" class="circleBorder" src="${currentMessage.value.profile_picture}"></img>&nbsp<b>${currentMessage.value.username}</b></div><div class="timeMessageContainer"><p class="timeMessageColumn actualTime">${(""+timedate.getHours()%12).padStart(2,"0")}:${(""+timedate.getMinutes()).padStart(2,"0")}:${(""+timedate.getSeconds()).padStart(2,"0")}</p><div>&nbsp</div><div class="theMessageItself">${currentMessage.value.message}</div></div></div>`
+                centerBody.innerHTML += `<div>
+                    <div class="messageHeader">
+                        <img width="${pfpWidth}" class="circleBorder" src="${currentMessage.value.profile_picture}"></img>
+                        &nbsp
+                        <b>${currentMessage.value.username}</b>
+                    </div>
+                    <div class="timeMessageContainer">
+                        <div class="flexContainer1">
+                            <p class="timeMessageColumn actualTime">
+                                ${(""+timedate.getHours()%12).padStart(2,"0")}:${(""+timedate.getMinutes()).padStart(2,"0")}:${(""+timedate.getSeconds()).padStart(2,"0")}
+                            </p>
+                            <div>&nbsp</div>
+                            <div class="theMessageItself">${currentMessage.value.message}</div>
+                            <div>&nbsp</div>
+                        </div>
+                        <div class="flexContainer2">
+                            <div class ="deleteButtonContainer">
+                                <button class="deleteButton">Delete</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>`
             }
+        }
+        let deleteButtons = document.getElementsByClassName("deleteButton");
+        for(var button of deleteButtons){
+            button.addEventListener("click",(e)=>{
+                console.log(e.currentTarget);
+            })
         }
         centerBody.scroll({
             top: 1000000000,
@@ -153,4 +196,9 @@ function prepareFrame(url) {
     ifrm.style.width = "640px";
     ifrm.style.height = "480px";
     return ifrm;
+}
+
+function removeMessage(reference){
+    reference
+
 }
