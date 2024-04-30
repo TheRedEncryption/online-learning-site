@@ -37,9 +37,7 @@ listAll(listRef)
                 console.log("userIDS")
                 console.log(userIDS)
                 userIDS.prefixes.forEach((articleRef) => {
-                    let tempp = document.createElement("p")
-                    tempp.innerText = articleRef.name;
-                    document.body.appendChild(tempp);
+                    document.body.innerHTML += courseModuleBuilder.buildCourse(articleRef.name, folderRef.prefixes[0].name);
                 });
             })
         });
