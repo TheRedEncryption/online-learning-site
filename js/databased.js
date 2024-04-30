@@ -10,6 +10,7 @@ let username;
 let profile_picture;
 let textingInput;
 let centerBody;
+let shifting = false;
 const extraBadWords = ["skibidi", "gyatt", "kill yourself", "cameraman", "helldivers"]
 
 const emoteLinks = [
@@ -66,8 +67,16 @@ window.addEventListener("load", () => {
     textingInput.addEventListener("focusout", () => {
         textingInput.setAttribute("placeholder", "");
     })
+    textingInput.addEventListener("keydown",(e)=>{
+        if(e.key=== 'Shift'){
+            shifting = true
+        }
+    })
     textingInput.addEventListener("keyup", (e) => {
-        if (e.key === 'Enter') {
+        if(e.key=== 'Shift'){
+            shifting = false;
+        }
+        if (e.key === 'Enter' && !shifting) {
             if (!(textingInput.value.trim() == "")) {
                 if (textingInput.value.length > 1000) {
                     textingInput.classList.add("redshake")
@@ -96,6 +105,10 @@ window.addEventListener("load", () => {
                 writeUserData(uid, username, textingInput.value, profile_picture)
             }
             textingInput.value = ""
+        }
+        else if (e.key==='Enter' && shifting){
+            console.log('NEW LINE ' + shifting)
+            textingInput.value = textingInput.value + "\n"
         }
     })
     const messagesRef = ref(db, 'messages/');
