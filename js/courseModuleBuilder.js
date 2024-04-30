@@ -12,7 +12,7 @@ class courseModuleBuilder{
             ${desc}
         </div>
         <br>
-        <button class = "shinyRed bold white containerWidth" tabindex>
+        <button class = "shinyRed bold white containerWidth" onclick="window.location.href = '${window.location.origin + "/course/" + btoa(title)}';" tabindex>
             Begin
         </button>
         <br><br>

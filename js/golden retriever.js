@@ -1,4 +1,4 @@
-import { getStorage, ref, listAll, list, getDownloadURL, getBytes } from "https://www.gstatic.com/firebasejs/10.8.1/firebase-storage.js";
+import { getStorage, ref, listAll, list, getDownloadURL, getBytes} from "https://www.gstatic.com/firebasejs/10.8.1/firebase-storage.js";
 import { getAuth, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/10.8.1/firebase-auth.js";
 import { marked } from "https://cdn.jsdelivr.net/npm/marked/lib/marked.esm.js";
 
@@ -46,20 +46,21 @@ async function initialCall() {
         .then((res) => {
             // console.log(res.items)
             // console.log(res.prefixes)
-            console.log(res);
             res.prefixes.forEach((folderRef) => {
                 let holder = document.getElementById("course-holder-main");
                 let coursesDataList = document.getElementById("coursesDataList");
-
+                
                 // please explain what this "if holder else if courses data list" is supposed to mean
-                if(holder){
-                    holder.innerHTML += courseModuleBuilder.buildCourse(folderRef.name, "123");
-                }
-                else if (coursesDataList){
-                    let option = document.createElement("option")
-                    option.value = folderRef.name
-                    coursesDataList.appendChild(option);
-                }
+                listAll(folderRef).then((res2)=>{
+                    if(holder){
+                        holder.innerHTML += courseModuleBuilder.buildCourse(folderRef.name, res2.prefixes[0].name);
+                    }
+                    else if (coursesDataList){
+                        let option = document.createElement("option")
+                        option.value = folderRef.name
+                        coursesDataList.appendChild(option);
+                    }
+                })
             });
         }).catch((error) => {
             // Uh-oh, an error occurred!
