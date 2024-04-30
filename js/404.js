@@ -26,12 +26,17 @@ try {
 let courseTitle = window.location.toString().substring(window.location.origin.length + "/online-learning-site/".length).split("/")[1];
 console.log(courseTitle)
 let listRef = sRef(storage, "courses/" + courseTitle)
+console.log(listRef)
 listAll(listRef)
-    .then((res) => {
+.then((res) => {
+        console.log(res)
         // console.log(res.items)
         // console.log(res.prefixes)
         res.prefixes.forEach((folderRef) => {
             console.log(folderRef)
+        });
+        res.items.forEach((itemRef) => {
+            console.log(itemRef)
         });
     }).catch((error) => {
         // Uh-oh, an error occurred!
