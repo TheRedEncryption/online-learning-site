@@ -46,99 +46,21 @@ async function initialCall() {
         .then((res) => {
             // console.log(res.items)
             // console.log(res.prefixes)
-            let counter = -1;
+            console.log(res);
             res.prefixes.forEach((folderRef) => {
-                counter += 1;
                 let holder = document.getElementById("course-holder-main");
                 let coursesDataList = document.getElementById("coursesDataList");
+
+                // please explain what this "if holder else if courses data list" is supposed to mean
                 if(holder){
-                    holder.innerHTML += "<div class='course-template-slot' data-coursename='" + folderRef.name + "'></div>";
-                    // title.classList.add("bold");
-                    // title.setAttribute('data-fontsize', 20);
-                    // title.innerText = folderRef.name;
-                    // courseTemplate.appendChild(title);
-                    // holder.appendChild(courseTemplate)
-                    $(".course-template-slot").load("./templates/course-holder-template.html", function(loadedTemplate){
-                        let currentSlot = $(".course-template-slot")[counter];
-                        // alert($(".course-template-slot")[counter]);
-                        if(true){
-                            alert(currentSlot.getElementsByClassName("course-title")[0].innerHTML);
-                            currentSlot.getElementsByClassName("course-title")[0].innerHTML = folderRef.name;
-                        }
-                    });
+                    holder.innerHTML += courseModuleBuilder.buildCourse(folderRef.name, "123");
                 }
                 else if (coursesDataList){
                     let option = document.createElement("option")
                     option.value = folderRef.name
                     coursesDataList.appendChild(option);
                 }
-                // All the prefixes under listRef.
-                // You may call listAll() recursively on them.
-                // listAll(folderRef)
-                //     .then((res2) => {
-                //         res2.prefixes.forEach((folderRef2) => {
-                //             // All the prefixes under listRef.
-                //             // You may call listAll() recursively on them.
-                //             listAll(folderRef2)
-                //                 .then((res3) => {
-                //                     console.log(res3);
-                //                     res3.items.forEach((itemRef3) => {
-                //                         // All the items under listRef.
-                //                         console.log(itemRef3)
-                //                         // XMLHttpRequest
-                //                         getDownloadURL(itemRef3)
-                //                             .then((url) => {
-                //                                 // `url` is the download URL for 'images/stars.jpg'
-                //                                 console.log(url);
-
-                //                                 // This can be downloaded directly:
-                //                                 const xhr = new XMLHttpRequest();
-                //                                 xhr.responseType = 'blob';
-                //                                 xhr.onload = (event) => {
-                //                                     const blob = xhr.response;
-                //                                     if (blob.type === "text/plain") {
-                //                                         let holder = document.getElementById("course-holder-main");
-
-                //                                         let courseTemplate = document.createElement("div")
-                //                                         courseTemplate.classList.add("course-holder", "sillyRotate");
-                //                                         let title = document.createElement("div")
-                //                                         title.classList.add("bold");
-                //                                         title.setAttribute('data-fontsize', 20);
-                //                                         title.innerText = itemRef3.parent.name;
-                //                                         courseTemplate.appendChild(title);
-                //                                         holder.appendChild(courseTemplate)
-                //                                         replaceTemplates()
-                //                                         // let courseTemplate = document.createElement("course-holder-template")
-                //                                         // console.log(courseTemplate);
-                //                                         // holder.appendChild(courseTemplate)
-                //                                         // replaceTemplates()
-
-
-
-                //                                         // WILL USE FOR LOADING TEXT AND MP4 ONTO PAGE
-                //                                         // blob.text().then((givemetheshit)=>{
-                //                                         //     document.getElementById("temptextplacehere").innerHTML += marked.parse(givemetheshit) + "\n\n";
-                //                                         // })
-                //                                     }
-                //                                 };
-                //                                 xhr.open('GET', url);
-                //                                 xhr.send();
-
-
-
-                //                                 // // Or inserted into an <img> element
-                //                                 // const img = document.getElementById('myimg');
-                //                                 // img.setAttribute('src', url);
-                //                             })
-                //                             .catch((error) => {
-                //                                 // Handle any errors
-                //                             });
-                //                     });
-                //                 });
-                //         });
-                //     });
             });
-            document.getElementById("courseName").disabled=false;
         }).catch((error) => {
             // Uh-oh, an error occurred!
             console.error(error)
