@@ -23,7 +23,7 @@ try {
 } catch (error) {
     alert(error);
 }
-let courseTitle = window.location.toString().substring(window.location.origin.length + "/online-learning-site/".length).split("/")[1];
+let courseTitle = atob(window.location.toString().substring(window.location.origin.length + "/online-learning-site/".length).split("/")[1]);
 console.log(courseTitle)
 let listRef = sRef(storage, "courses/" + courseTitle)
 console.log(listRef)
