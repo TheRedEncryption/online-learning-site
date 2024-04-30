@@ -37,10 +37,9 @@ listAll(listRef)
                 console.log("userIDS")
                 console.log(userIDS)
                 userIDS.prefixes.forEach((articleRef) => {
-                    listAll(articleRef).then((articleParts)=>{
-                        console.log("articleParts")
-                        console.log(articleParts)
-                    })
+                    let tempp = document.createElement("p")
+                    tempp.innerText = articleRef.name;
+                    document.body.appendChild(tempp);
                 });
             })
         });
@@ -48,3 +47,8 @@ listAll(listRef)
         // Uh-oh, an error occurred!
         console.error(error)
     });
+
+    // listAll(articleRef).then((articleParts)=>{
+    //     console.log("articleParts")
+    //     console.log(articleParts)
+    // })
