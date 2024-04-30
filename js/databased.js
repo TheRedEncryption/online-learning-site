@@ -1,5 +1,5 @@
 import { getAuth, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/10.8.1/firebase-auth.js";
-import { getDatabase, ref, set, onValue } from "https://www.gstatic.com/firebasejs/10.8.1/firebase-database.js";
+import { getDatabase, ref, set, onValue, remove } from "https://www.gstatic.com/firebasejs/10.8.1/firebase-database.js";
 import { marked } from "https://cdn.jsdelivr.net/npm/marked/lib/marked.esm.js";
 
 const parser = new DOMParser();
@@ -13,13 +13,13 @@ let centerBody;
 const extraBadWords = ["skibidi", "gyatt", "kill yourself", "cameraman", "helldivers"]
 
 const emoteLinks = [
-    "kitty.png", 
+    "kitty.png",
     "yippee.jpg",
     "yippee_bounce.gif"
 ]
 const emoteNames = [];
-emoteLinks.forEach((element)=>{
-    emoteNames.push(element.substring(0,element.indexOf(".")))
+emoteLinks.forEach((element) => {
+    emoteNames.push(element.substring(0, element.indexOf(".")))
 })
 console.log(emoteNames)
 
@@ -44,7 +44,7 @@ onAuthStateChanged(auth, (user) => {
     }
 });
 function writeUserData(userId, name, message, imageUrl) {
-    if(!imageUrl){
+    if (!imageUrl) {
         imageUrl = "/online-learning-site/assets/images/user_profile_default.png"
     }
 
@@ -60,16 +60,16 @@ function writeUserData(userId, name, message, imageUrl) {
 window.addEventListener("load", () => {
     textingInput = document.getElementById("textingInput")
     centerBody = document.getElementById("centerBody")
-    textingInput.addEventListener("focus",()=>{
-        textingInput.setAttribute("placeholder", ":"+emoteNames.join(": :") + ":")
+    textingInput.addEventListener("focus", () => {
+        textingInput.setAttribute("placeholder", ":" + emoteNames.join(": :") + ":")
     })
-    textingInput.addEventListener("focusout",()=>{
-        textingInput.setAttribute("placeholder","");
+    textingInput.addEventListener("focusout", () => {
+        textingInput.setAttribute("placeholder", "");
     })
     textingInput.addEventListener("keyup", (e) => {
         if (e.key === 'Enter') {
-            if (!(textingInput.value.trim()=="")) {
-                if(textingInput.value.length>1000){
+            if (!(textingInput.value.trim() == "")) {
+                if (textingInput.value.length > 1000) {
                     textingInput.classList.add("redshake")
                     setTimeout(() => {
                         textingInput.classList.remove("redshake")
@@ -78,13 +78,13 @@ window.addEventListener("load", () => {
                 }
                 textingInput.value = textingInput.value.replaceAll("<", "");
                 let temp = textingInput.value.match(/https?:\/\/(www\.)?[-a-zA-Z0-9@:%._\+~#=]{1,256}\.[a-zA-Z0-9()]{1,6}\b([-a-zA-Z0-9()@:%_\+,.~#?&//=]*)/);
-                textingInput.value = DOMPurify.sanitize(profanityCleaner.clean(textingInput.value, { keepFirstAndLastChar: true, customBadWords: extraBadWords}))
+                textingInput.value = DOMPurify.sanitize(profanityCleaner.clean(textingInput.value, { keepFirstAndLastChar: true, customBadWords: extraBadWords }))
                 let emotes = textingInput.value.match(/:.+?:/g)
-                if(emotes){
+                if (emotes) {
                     // console.log(emotes)
-                    for(var i = 0; i < emotes.length; i++){
-                        let emoteURL = emoteLinks.find((element) => element.includes(emotes[i].replaceAll(":","")))
-                        if(emoteURL){
+                    for (var i = 0; i < emotes.length; i++) {
+                        let emoteURL = emoteLinks.find((element) => element.includes(emotes[i].replaceAll(":", "")))
+                        if (emoteURL) {
                             emotes[i] = `<img src="/online-learning-site/emotes/${emoteURL}" width="${pfpWidth}"></img>`
                             // console.log(emotes[i])
                             textingInput.value = textingInput.value.replace(/:.+?:/, emotes[i])
@@ -129,16 +129,23 @@ window.addEventListener("load", () => {
             let currentMessage = messagesByTimestamp[i];
             let previousMessage = messagesByTimestamp[i - 1];
             lastHeaderTime = currentMessage.timestamp
-            if(!currentMessage.value.profile_picture){
+            if (!currentMessage.value.profile_picture) {
                 currentMessage.value.profile_picture = "../assets/images/user_profile_default.png"
             }
             let timedate = new Date(+currentMessage.timestamp);
+            let isSameUser;
+            if (currentMessage.userReference === uid) {
+                isSameUser = true;
+            }
+            else {
+                isSameUser = false;
+            }
             if (previousMessage !== undefined && previousMessage.value.username === currentMessage.value.username && Math.abs(lastHeaderTime - currentMessage.timestamp) < 20 * 60 * 1000) {
                 centerBody.innerHTML += `<div>
                 <div class="timeMessageContainer">
                 <div class="flexContainer1">
                     <p class="timeMessageColumn actualTime">
-                        ${(""+timedate.getHours()%12).padStart(2,"0")}:${(""+timedate.getMinutes()).padStart(2,"0")}:${(""+timedate.getSeconds()).padStart(2,"0")}
+                        ${("" + timedate.getHours() % 12).padStart(2, "0")}:${("" + timedate.getMinutes()).padStart(2, "0")}:${("" + timedate.getSeconds()).padStart(2, "0")}
                     </p>
                     <div>&nbsp</div>
                     <div class="theMessageItself">${currentMessage.value.message}</div>
@@ -146,7 +153,7 @@ window.addEventListener("load", () => {
                 </div>
                 <div class="flexContainer2">
                     <div class ="deleteButtonContainer">
-                        <button class="deleteButton">Delete</button>
+                        ${isSameUser ? `<button class="deleteButton" id="${btoa("" + currentMessage.userReference + "," + currentMessage.timestamp)}">🗑️</button>` : ''}
                     </div>
                 </div>
             </div>
@@ -162,7 +169,7 @@ window.addEventListener("load", () => {
                     <div class="timeMessageContainer">
                         <div class="flexContainer1">
                             <p class="timeMessageColumn actualTime">
-                                ${(""+timedate.getHours()%12).padStart(2,"0")}:${(""+timedate.getMinutes()).padStart(2,"0")}:${(""+timedate.getSeconds()).padStart(2,"0")}
+                                ${("" + timedate.getHours() % 12).padStart(2, "0")}:${("" + timedate.getMinutes()).padStart(2, "0")}:${("" + timedate.getSeconds()).padStart(2, "0")}
                             </p>
                             <div>&nbsp</div>
                             <div class="theMessageItself">${currentMessage.value.message}</div>
@@ -170,7 +177,7 @@ window.addEventListener("load", () => {
                         </div>
                         <div class="flexContainer2">
                             <div class ="deleteButtonContainer">
-                                <button class="deleteButton">Delete</button>
+                                ${isSameUser ? `<button class="deleteButton" id="${btoa("" + currentMessage.userReference + "," + currentMessage.timestamp)}">🗑️</button>` : ''}
                             </div>
                         </div>
                     </div>
@@ -178,9 +185,15 @@ window.addEventListener("load", () => {
             }
         }
         let deleteButtons = document.getElementsByClassName("deleteButton");
-        for(var button of deleteButtons){
-            button.addEventListener("click",(e)=>{
-                console.log(e.currentTarget);
+        for (var button of deleteButtons) {
+            button.addEventListener("click", (e) => {
+                console.log(atob(e.currentTarget.id).split(',')[0]);
+                let userandtime = atob(e.currentTarget.id).split(',')
+                console.log(userandtime[0] + "/" + userandtime[1])
+                console.log(db)
+                let tempRef = ref(db, "messages/" + userandtime[0] + "/" + userandtime[1])
+                console.log(tempRef)
+                remove(tempRef)
             })
         }
         centerBody.scroll({
@@ -198,7 +211,7 @@ function prepareFrame(url) {
     return ifrm;
 }
 
-function removeMessage(reference){
+function removeMessage(reference) {
     reference
 
 }

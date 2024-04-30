@@ -1,4 +1,4 @@
-import { getStorage, ref, uploadBytes } from "https://www.gstatic.com/firebasejs/10.8.1/firebase-storage.js";
+import { getStorage, ref as sRef, uploadBytes } from "https://www.gstatic.com/firebasejs/10.8.1/firebase-storage.js";
 import { getAuth, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/10.8.1/firebase-auth.js";
 
 // Get a reference to the storage service, which is used to create references in your storage bucket
@@ -24,7 +24,7 @@ onAuthStateChanged(auth, (user) => {
     // User is signed in, see docs for a list of available properties
     // https://firebase.google.com/docs/reference/js/auth.user
     uid = user.uid;
-    storageRef = ref(storage, `courses`);
+    storageRef = sRef(storage, `courses`);
     // ...
   } else {
     // User is signed out
@@ -56,7 +56,7 @@ function initialCall() {
     var blob = new Blob([document.getElementById("textarea").value], {type: "text/plain"});
     /*uploadFileInput.files[0].name*/
     if(uploadFileInput.files[0]){
-      uploadBytes(ref(storageRef, courseName.value + "/" + uid + "/" + projectName.value + "/" + uploadFileInput.files[0].name), uploadFileInput.files[0]).then((snapshot) => {
+      uploadBytes(sRef(storageRef, courseName.value + "/" + uid + "/" + projectName.value + "/" + uploadFileInput.files[0].name), uploadFileInput.files[0]).then((snapshot) => {
         console.log('Uploaded a blob or file!');
         document.getElementById("badtoast").innerText += "File success"
       }).catch((error) => {
@@ -65,7 +65,7 @@ function initialCall() {
       })
     }
     if(blob){
-      uploadBytes(ref(storageRef, courseName.value + "/" + uid + "/" + projectName.value + "/" + "markdownText.txt"), blob).then((snapshot) => {
+      uploadBytes(sRef(storageRef, courseName.value + "/" + uid + "/" + projectName.value + "/" + "markdownText.txt"), blob).then((snapshot) => {
         console.log('Uploaded the markdown blob or file!');
         document.getElementById("badtoast").innerText += "Markdown success"
       }).catch((error) => {

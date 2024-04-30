@@ -1,4 +1,4 @@
-import { getStorage, ref, listAll, list, getDownloadURL, getBytes} from "https://www.gstatic.com/firebasejs/10.8.1/firebase-storage.js";
+import { getStorage, ref as sRef, listAll, list, getDownloadURL, getBytes} from "https://www.gstatic.com/firebasejs/10.8.1/firebase-storage.js";
 import { getAuth, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/10.8.1/firebase-auth.js";
 import { marked } from "https://cdn.jsdelivr.net/npm/marked/lib/marked.esm.js";
 
@@ -24,7 +24,7 @@ onAuthStateChanged(auth, (user) => {
         // User is signed in, see docs for a list of available properties
         // https://firebase.google.com/docs/reference/js/auth.user
         const uid = user.uid;
-        storageRef = ref(storage, `user/${user.uid}`);
+        storageRef = sRef(storage, `user/${user.uid}`);
         // ...
     } else {
         // User is signed out
@@ -38,7 +38,7 @@ async function initialCall() {
 
     // Create a reference with an initial file path and name
     const storage = getStorage();
-    const listRef = ref(storage, 'courses');
+    const listRef = sRef(storage, 'courses');
 
 
     console.log(listRef)
