@@ -38,10 +38,17 @@ function findElementWithAttribute(attributeName) {
 function replaceTemplates() {
 
     $(function () {
-        // SET BACK TO ./templates/header-template.html TO TEST USING FIVE SERVER
-        $("header-template").load("./templates/header-template.html");
-        // $("course-holder-template").load("./templates/course-holder-template.html");
-        $("footer-template").load("./templates/header-template.html", onLoadEndJQuery);
+        // tries to load in using relative file path, if not working then switch to absolue
+        try{
+            $("header-template").load("./templates/header-template.html");
+            $("footer-template").load("./templates/footer-template.html", onLoadEndJQuery);
+            console.log("Relative path loading successful!");
+        }
+        catch(error){
+            $("header-template").load("https://theredencryption.github.io/online-learning-site/templates/header-template.html");
+            $("footer-template").load("https://theredencryption.github.io/online-learning-site/templates/footer-template.html", onLoadEndJQuery);
+            console.log("Relative path loading failed! Switching to absolute path loading!");
+        }
     });
     // is this even sensible? mi i scared... :fearful:
     function onLoadEndJQuery() {
