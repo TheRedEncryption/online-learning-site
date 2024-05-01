@@ -36,10 +36,12 @@ function findElementWithAttribute(attributeName) {
 }
 
 function replaceTemplates() {
+
     $(function () {
+        // SET BACK TO ./templates/header-template.html TO TEST USING FIVE SERVER
         $("header-template").load("./templates/header-template.html");
         // $("course-holder-template").load("./templates/course-holder-template.html");
-        $("footer-template").load("./templates/footer-template.html", onLoadEndJQuery);
+        $("footer-template").load("./templates/header-template.html", onLoadEndJQuery);
     });
     // is this even sensible? mi i scared... :fearful:
     function onLoadEndJQuery() {

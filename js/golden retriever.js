@@ -60,6 +60,7 @@ async function initialCall() {
                     }
                 })
             });
+            document.getElementById("courseName").disabled=false;
         }).catch((error) => {
             // Uh-oh, an error occurred!
             console.error(error)
