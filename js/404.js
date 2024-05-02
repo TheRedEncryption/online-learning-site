@@ -115,7 +115,7 @@ else if(urlArray[0] === 'course'){
                     console.log("userIDS")
                     console.log(userIDS)
                     userIDS.prefixes.forEach((articleRef) => {
-                        document.body.innerHTML += articleModuleBuilder.buildCourse(articleRef.name, articleRef.parent.name);
+                        document.getElementById("markdownHolder").innerHTML += articleModuleBuilder.buildCourse(articleRef.name, articleRef.parent.name);
                     });
                 })
             });
