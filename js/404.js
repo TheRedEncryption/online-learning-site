@@ -66,7 +66,7 @@ if(urlArray[0] === 'course' && urlArray[2] === 'read'){
                                             // This can be downloaded directly:
                                             const xhr = new XMLHttpRequest();
                                             xhr.responseType = 'blob';
-                                            xhr.onload = (event) => {
+                                            xhr.addEventListener("load", (event) => {
                                                 const blob = xhr.response;
                                                 if (blob.type === "text/plain") {
                                                     // WILL USE FOR LOADING TEXT AND MP4 ONTO PAGE
@@ -80,7 +80,11 @@ if(urlArray[0] === 'course' && urlArray[2] === 'read'){
                                                     tempVideoElement.style = "width:800px;height:600px;"
                                                     display(blob, tempVideoElement)
                                                 }
-                                            };
+                                            }).then(()=>{
+                                                if(!hasVideo){
+                                                    document.getElementById("videoHolder").remove();
+                                                }
+                                            })
                                             xhr.open('GET', url);
                                             xhr.send();
     
@@ -94,9 +98,6 @@ if(urlArray[0] === 'course' && urlArray[2] === 'read'){
                                             // Handle any errors
                                         });
                                 });
-                                if(!hasVideo){
-                                    document.getElementById("videoHolder").remove();
-                                }
                                 // document.body.innerHTML += articleModuleBuilder.buildCourse(articleRef.name, articleRef.parent.name);
                             })
                         }
