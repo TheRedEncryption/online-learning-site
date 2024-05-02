@@ -33,6 +33,7 @@ if(urlArray[0] === 'course' && urlArray[2] === 'read'){
     tempVideoElement.id="videoHolder"
     tempVideoElement.controls = true;
     tempVideoElement.style = "width:800px;height:600px;"
+    tempVideoElement.hidden = true;
     centerModule2.insertBefore(tempVideoElement, centerModule2.firstChild)
     let courseTitle = atob(urlArray[1]);
     let articleTitle = atob(urlArray[3]);
@@ -46,7 +47,6 @@ if(urlArray[0] === 'course' && urlArray[2] === 'read'){
             console.log(coursesReference)
             // console.log(coursesReference.items)
             // console.log(coursesReference.prefixes)
-            let hasVideo = false;
             coursesReference.prefixes.forEach((folderRef) => {
                 listAll(folderRef).then((userIDS)=>{
                     console.log("userIDS")
@@ -77,7 +77,7 @@ if(urlArray[0] === 'course' && urlArray[2] === 'read'){
                                                 else if (blob.type.indexOf("video/")==0) {
                                                     // WILL USE FOR LOADING TEXT AND MP4 ONTO PAGE
                                                     display(blob, document.getElementById("videoHolder"))
-                                                    hasVideo = true;
+                                                    tempVideoElement.hidden = false;
                                                 }
                                             }
                                             xhr.open('GET', url);
@@ -99,9 +99,6 @@ if(urlArray[0] === 'course' && urlArray[2] === 'read'){
                     });
                 })
             });
-            if(!hasVideo){
-                document.getElementById("videoHolder").remove();
-            }
         }).catch((error) => {
             // Uh-oh, an error occurred!
             console.error(error)
