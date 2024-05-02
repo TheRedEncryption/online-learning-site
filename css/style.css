@@ -306,6 +306,7 @@ h1.sectionHeader {
     display: flex;
     justify-content: center;
     flex-direction: column;
+    align-items: center;
     margin-top: 10%;
     margin-bottom: 2em;
 }
