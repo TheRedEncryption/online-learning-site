@@ -77,7 +77,7 @@ if(urlArray[0] === 'course' && urlArray[2] === 'read'){
                                                 else if (blob.type.indexOf("video/")==0) {
                                                     // WILL USE FOR LOADING TEXT AND MP4 ONTO PAGE
                                                     hasVideo = true;
-                                                    document.getElementById("videoHolder").style = "width:800px;height:600px;"
+                                                    tempVideoElement.style = "width:800px;height:600px;"
                                                     display(blob, document.getElementById("videoHolder"))
                                                 }
                                             };
