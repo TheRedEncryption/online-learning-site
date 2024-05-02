@@ -305,6 +305,7 @@ h1.sectionHeader {
     height: auto;
     display: flex;
     justify-content: center;
+    flex-direction: column;
     margin-top: 10%;
     margin-bottom: 2em;
 }
