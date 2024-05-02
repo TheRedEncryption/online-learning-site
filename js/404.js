@@ -77,6 +77,7 @@ if(urlArray[0] === 'course' && urlArray[2] === 'read'){
                                                 else if (blob.type.indexOf("video/")==0) {
                                                     // WILL USE FOR LOADING TEXT AND MP4 ONTO PAGE
                                                     display(blob, document.getElementById("videoHolder"))
+                                                    hasVideo = true;
                                                 }
                                             }
                                             xhr.open('GET', url);
@@ -92,6 +93,9 @@ if(urlArray[0] === 'course' && urlArray[2] === 'read'){
                                             // Handle any errors
                                         });
                                 });
+                                if(!hasVideo){
+                                    document.getElementById("videoHolder").remove();
+                                }
                                 // document.body.innerHTML += articleModuleBuilder.buildCourse(articleRef.name, articleRef.parent.name);
                             })
                         }
