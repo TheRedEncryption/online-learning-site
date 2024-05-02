@@ -37,7 +37,7 @@ class articleModuleBuilder{
             ${desc}
         </div>
         <br>
-        <button class = "shinyRed bold white containerWidth" onclick="window.location.href = '${window.location.href + "/" + btoa(title)}';" tabindex>
+        <button class = "shinyRed bold white containerWidth" onclick="window.location.href = '${window.location.href + "/read/" + btoa(title)}';" tabindex>
             View Article
         </button>
     </div>`;
