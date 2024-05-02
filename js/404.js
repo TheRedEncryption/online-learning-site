@@ -51,47 +51,49 @@ if(urlArray[0] === 'course' && urlArray[2] === 'read'){
                     console.log("userIDS")
                     console.log(userIDS)
                     userIDS.prefixes.forEach((articleRef) => {
-                        listAll(articleRef).then((articleParts)=>{
-                            console.log("articleParts")
-                            console.log(articleParts)
-                            articleParts.items.forEach((file) => {
-                                console.log(file)
-                                getDownloadURL(file)
-                                    .then((url) => {
-                                        // `url` is the download URL for 'images/stars.jpg'
-                                        console.log(url);
-
-                                        // This can be downloaded directly:
-                                        const xhr = new XMLHttpRequest();
-                                        xhr.responseType = 'blob';
-                                        xhr.onload = (event) => {
-                                            const blob = xhr.response;
-                                            if (blob.type === "text/plain") {
-                                                // WILL USE FOR LOADING TEXT AND MP4 ONTO PAGE
-                                                blob.text().then((givemetheshit)=>{
-                                                    document.getElementById("markdownHolder").innerHTML += marked.parse(givemetheshit) + "\n\n";
-                                                })
-                                            }
-                                            else if (blob.type.indexOf("video/")==0) {
-                                                // WILL USE FOR LOADING TEXT AND MP4 ONTO PAGE
-                                                display(blob, document.getElementById("videoHolder"))
-                                            }
-                                        };
-                                        xhr.open('GET', url);
-                                        xhr.send();
-
-
-
-                                        // // Or inserted into an <img> element
-                                        // const img = document.getElementById('myimg');
-                                        // img.setAttribute('src', url);
-                                    })
-                                    .catch((error) => {
-                                        // Handle any errors
-                                    });
-                            });
-                            // document.body.innerHTML += articleModuleBuilder.buildCourse(articleRef.name, articleRef.parent.name);
-                        })
+                        if(articleRef.name === articleTitle){
+                            listAll(articleRef).then((articleParts)=>{
+                                console.log("articleParts")
+                                console.log(articleParts)
+                                articleParts.items.forEach((file) => {
+                                    console.log(file)
+                                    getDownloadURL(file)
+                                        .then((url) => {
+                                            // `url` is the download URL for 'images/stars.jpg'
+                                            console.log(url);
+    
+                                            // This can be downloaded directly:
+                                            const xhr = new XMLHttpRequest();
+                                            xhr.responseType = 'blob';
+                                            xhr.onload = (event) => {
+                                                const blob = xhr.response;
+                                                if (blob.type === "text/plain") {
+                                                    // WILL USE FOR LOADING TEXT AND MP4 ONTO PAGE
+                                                    blob.text().then((givemetheshit)=>{
+                                                        document.getElementById("markdownHolder").innerHTML += marked.parse(givemetheshit) + "\n\n";
+                                                    })
+                                                }
+                                                else if (blob.type.indexOf("video/")==0) {
+                                                    // WILL USE FOR LOADING TEXT AND MP4 ONTO PAGE
+                                                    display(blob, document.getElementById("videoHolder"))
+                                                }
+                                            };
+                                            xhr.open('GET', url);
+                                            xhr.send();
+    
+    
+    
+                                            // // Or inserted into an <img> element
+                                            // const img = document.getElementById('myimg');
+                                            // img.setAttribute('src', url);
+                                        })
+                                        .catch((error) => {
+                                            // Handle any errors
+                                        });
+                                });
+                                // document.body.innerHTML += articleModuleBuilder.buildCourse(articleRef.name, articleRef.parent.name);
+                            })
+                        }
                     });
                 })
             });
