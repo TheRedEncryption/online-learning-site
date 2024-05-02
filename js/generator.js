@@ -40,14 +40,14 @@ function replaceTemplates() {
     $(function () {
         // tries to load in using relative file path, if not working then switch to absolue
         try{
-            $("header-template").load("./templates/header-template.html");
-            $("footer-template").load("./templates/footer-template.html", onLoadEndJQuery);
-            console.log("Relative path loading successful!");
-        }
-        catch(error){
             $("header-template").load("https://theredencryption.github.io/online-learning-site/templates/header-template.html");
             $("footer-template").load("https://theredencryption.github.io/online-learning-site/templates/footer-template.html", onLoadEndJQuery);
-            console.log("Relative path loading failed! Switching to absolute path loading!");
+            console.log("Absolute path loading successful!");
+        }
+        catch(error){
+            $("header-template").load("./templates/header-template.html");
+            $("footer-template").load("./templates/footer-template.html", onLoadEndJQuery);
+            console.log("Absolute path loading failed! Switching to relative path loading!");
         }
     });
     // is this even sensible? mi i scared... :fearful:
