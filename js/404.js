@@ -29,18 +29,11 @@ console.log(urlArray)
 if(urlArray[0] === 'course' && urlArray[2] === 'read'){
     let centerModule2 = document.getElementById("centerModule2");
     let tempVideoElement = document.createElement('video')
-    let tempTextElement = document.createElement('div')
     //        <video id="tempvideoplacehere" controls style="width:800px;height:600px;"></video>
     tempVideoElement.id="videoHolder"
     tempVideoElement.controls = true;
     tempVideoElement.style = "width:800px;height:600px;"
-    // <div id="markdownHolder" class = "centerBody" style="overflow-y: hidden"></div> 
-    tempTextElement.id="markdownHolder"
-    tempTextElement.classList.add("centerBody");
-    tempTextElement.style = "overflow-y: hidden"
-    centerModule2.appendChild(tempVideoElement)
-    centerModule2.appendChild(tempTextElement)
-
+    centerModule2.insertBefore(tempVideoElement, centerModule2.firstChild)
     let courseTitle = atob(urlArray[1]);
     let articleTitle = atob(urlArray[3]);
     console.log("BOTH")
@@ -122,7 +115,7 @@ else if(urlArray[0] === 'course'){
                     console.log("userIDS")
                     console.log(userIDS)
                     userIDS.prefixes.forEach((articleRef) => {
-                        document.getElementById("temptextplacehere").innerHTML += articleModuleBuilder.buildCourse(articleRef.name, articleRef.parent.name);
+                        document.body.innerHTML += articleModuleBuilder.buildCourse(articleRef.name, articleRef.parent.name);
                     });
                 })
             });
