@@ -25,6 +25,7 @@ try {
 } catch (error) {
     alert(error);
 }
+console.log(urlArray)
 if(urlArray[0] === 'course' && urlArray[2] === 'read'){
     let courseTitle = atob(urlArray[1]);
     let articleTitle = atob(urlArray[3]);
