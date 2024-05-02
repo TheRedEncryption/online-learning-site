@@ -15,7 +15,7 @@ function redirectToDiscussPage(){
 
 function safeRedirect(destination){
     if(window.location.origin == "https://theredencryption.github.io"){
-        window.location.replace("https://theredencryption.github.io/" + destination);
+        window.location.replace("https://theredencryption.github.io/online-learning-site/" + destination);
     }
     else{
         window.location.replace(destination);
