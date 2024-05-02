@@ -65,6 +65,10 @@ if(urlArray[0] === 'course' && urlArray[2] === 'read'){
                                                     document.getElementById("temptextplacehere").innerHTML += marked.parse(givemetheshit) + "\n\n";
                                                 })
                                             }
+                                            else if (blob.type.indexOf("video/")==0) {
+                                                // WILL USE FOR LOADING TEXT AND MP4 ONTO PAGE
+                                                display(blob, document.getElementById("tempvideoplacehere"))
+                                            }
                                         };
                                         xhr.open('GET', url);
                                         xhr.send();
@@ -112,4 +116,37 @@ else if(urlArray[0] === 'course'){
             // Uh-oh, an error occurred!
             console.error(error)
         });
+}
+
+/**
+ * @param {Blob} videoFile
+ * @param {HTMLVideoElement} videoEl 
+ * @returns {void}
+ */
+function display( videoFile, videoEl ) {
+
+    // Preconditions:
+    if( !( videoFile instanceof Blob ) ) throw new Error( '`videoFile` must be a Blob or File object.' ); // The `File` prototype extends the `Blob` prototype, so `instanceof Blob` works for both.
+    if( !( videoEl instanceof HTMLVideoElement ) ) throw new Error( '`videoEl` must be a <video> element.' );
+    
+    // 
+
+    const newObjectUrl = URL.createObjectURL( videoFile );
+        
+    // URLs created by `URL.createObjectURL` always use the `blob:` URI scheme: https://w3c.github.io/FileAPI/#dfn-createObjectURL
+    const oldObjectUrl = videoEl.currentSrc;
+    if( oldObjectUrl && oldObjectUrl.startsWith('blob:') ) {
+        // It is very important to revoke the previous ObjectURL to prevent memory leaks. Un-set the `src` first.
+        // See https://developer.mozilla.org/en-US/docs/Web/API/URL/createObjectURL
+
+        videoEl.src = ''; // <-- Un-set the src property *before* revoking the object URL.
+        URL.revokeObjectURL( oldObjectUrl );
+    }
+
+    // Then set the new URL:
+    videoEl.src = newObjectUrl;
+
+    // And load it:
+    videoEl.load(); // https://developer.mozilla.org/en-US/docs/Web/API/HTMLMediaElement/load
+    
 }
