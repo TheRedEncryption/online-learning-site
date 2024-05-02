@@ -300,6 +300,16 @@ h1.sectionHeader {
     margin-bottom: 2em;
 }
 
+.centerModule2 {
+    width: 100%;
+    height: auto;
+    display: flex;
+    justify-content: center;
+    margin-top: 10%;
+    margin-bottom: 2em;
+}
+
+
 .centerBody {
     background-color: white;
     width: 60%;
