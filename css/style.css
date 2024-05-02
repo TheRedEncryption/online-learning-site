@@ -131,6 +131,7 @@ body {
     justify-content: center;
     align-items: center;
     padding: 1em;
+    z-index: 1000000;
 }
 
 .footer {
@@ -416,4 +417,8 @@ h1.sectionHeader {
 }
 .deleteButton:hover{
     opacity:100%;
+}
+
+.clickhover{
+    cursor: pointer;
 }
