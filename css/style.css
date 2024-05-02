@@ -120,8 +120,6 @@ body {
     padding: 1em;
 }
 
-
-
 .header {
     width: 100%;
     height: 10vh;
@@ -421,4 +419,8 @@ h1.sectionHeader {
 
 .clickhover{
     cursor: pointer;
+}
+
+code.hljs{
+    font-family: 'Courier New', Courier, monospace;
 }
