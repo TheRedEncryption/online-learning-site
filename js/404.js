@@ -32,7 +32,7 @@ if(urlArray[0] === 'course' && urlArray[2] === 'read'){
     //        <video id="tempvideoplacehere" controls style="width:800px;height:600px;"></video>
     tempVideoElement.id="videoHolder"
     tempVideoElement.controls = true;
-    tempVideoElement.style = "width:800px;height:600px;"
+    tempVideoElement.style = "width:0px;height:0px;"
     centerModule2.insertBefore(tempVideoElement, centerModule2.firstChild)
     let courseTitle = atob(urlArray[1]);
     let articleTitle = atob(urlArray[3]);
@@ -78,6 +78,7 @@ if(urlArray[0] === 'course' && urlArray[2] === 'read'){
                                                     // WILL USE FOR LOADING TEXT AND MP4 ONTO PAGE
                                                     hasVideo = true;
                                                     display(blob, document.getElementById("videoHolder"))
+                                                    document.getElementById("videoHolder").style = "width:800px;height:600px;"
                                                 }
                                             };
                                             xhr.open('GET', url);
