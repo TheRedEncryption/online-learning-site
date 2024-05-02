@@ -55,9 +55,9 @@ if(urlArray[0] === 'course' && urlArray[2] === 'read'){
                             listAll(articleRef).then((articleParts)=>{
                                 console.log("articleParts")
                                 console.log(articleParts)
+                                let hasVideo = false;
                                 articleParts.items.forEach((file) => {
                                     console.log(file)
-                                    let hasVideo = false;
                                     getDownloadURL(file)
                                         .then((url) => {
                                             // `url` is the download URL for 'images/stars.jpg'
