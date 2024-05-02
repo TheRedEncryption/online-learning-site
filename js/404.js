@@ -20,11 +20,11 @@ onAuthStateChanged(auth, (user) => {
 });
 let urlString = window.location.toString().substring(window.location.origin.length + "/online-learning-site/".length)
 let urlArray = urlString.split("/")
-try {
-    document.body.innerHTML += urlString;
-} catch (error) {
-    alert(error);
-}
+// try {
+//     document.body.innerHTML += urlString;
+// } catch (error) {
+//     alert(error);
+// }
 console.log(urlArray)
 if(urlArray[0] === 'course' && urlArray[2] === 'read'){
     let courseTitle = atob(urlArray[1]);
