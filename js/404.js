@@ -27,7 +27,10 @@ try {
 }
 if(urlArray[0] === 'course' && urlArray[2] === 'read'){
     let courseTitle = atob(urlArray[1]);
+    let articleTitle = atob(urlArray[3]);
+    console.log("BOTH")
     console.log(courseTitle)
+    console.log(articleTitle)
     let listRef = sRef(storage, "courses/" + courseTitle)
     console.log(listRef)
     listAll(listRef)
@@ -40,7 +43,11 @@ if(urlArray[0] === 'course' && urlArray[2] === 'read'){
                     console.log("userIDS")
                     console.log(userIDS)
                     userIDS.prefixes.forEach((articleRef) => {
-                        document.body.innerHTML += articleModuleBuilder.buildCourse(articleRef.name, articleRef.parent.name);
+                        listAll(articleRef).then((articleParts)=>{
+                            console.log("articleParts")
+                            console.log(articleParts)
+                            // document.body.innerHTML += articleModuleBuilder.buildCourse(articleRef.name, articleRef.parent.name);
+                        })
                     });
                 })
             });
@@ -64,7 +71,7 @@ else if(urlArray[0] === 'course'){
                     console.log("userIDS")
                     console.log(userIDS)
                     userIDS.prefixes.forEach((articleRef) => {
-                        document.body.innerHTML += articleModuleBuilder.buildCourse(articleRef.name, articleRef.parent.name);
+                        document.body.innerHTML += courseModuleBuilder.buildCourse(articleRef.name, articleRef.parent.name);
                     });
                 })
             });
@@ -73,8 +80,3 @@ else if(urlArray[0] === 'course'){
             console.error(error)
         });
 }
-
-    // listAll(articleRef).then((articleParts)=>{
-    //     console.log("articleParts")
-    //     console.log(articleParts)
-    // })
