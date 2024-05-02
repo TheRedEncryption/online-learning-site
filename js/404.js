@@ -94,6 +94,7 @@ if(urlArray[0] === 'course' && urlArray[2] === 'read'){
         });
 }
 else if(urlArray[0] === 'course'){
+    document.getElementById("tempvideoplacehere").remove();
     let courseTitle = atob(urlArray[1]);
     console.log(courseTitle)
     let listRef = sRef(storage, "courses/" + courseTitle)
@@ -116,6 +117,9 @@ else if(urlArray[0] === 'course'){
             // Uh-oh, an error occurred!
             console.error(error)
         });
+}
+else{
+    document.getElementById("tempvideoplacehere").remove();
 }
 
 /**
