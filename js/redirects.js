@@ -1,14 +1,23 @@
 // Redirects to a sign in page
 function redirectToSignIn(){
-    window.location.replace("userAuth.html");
+    safeRedirect("userAuth.html");
 }
 
 // Redirects to a sign in page
 function redirectToLearnPage(){
-    window.location.replace("learn.html");
+    safeRedirect("learn.html");
 }
 
 // Redirects to a sign in page
 function redirectToDiscussPage(){
-    window.location.replace("discuss.html");
+    safeRedirect("discuss.html");
+}
+
+function safeRedirect(destination){
+    if(window.location.origin == "https://theredencryption.github.io"){
+        window.location.replace("https://theredencryption.github.io/" + destination);
+    }
+    else{
+        window.location.replace(destination);
+    }
 }
