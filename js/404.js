@@ -29,11 +29,18 @@ console.log(urlArray)
 if(urlArray[0] === 'course' && urlArray[2] === 'read'){
     let centerModule2 = document.getElementById("centerModule2");
     let tempVideoElement = document.createElement('video')
+    let tempTextElement = document.createElement('div')
     //        <video id="tempvideoplacehere" controls style="width:800px;height:600px;"></video>
     tempVideoElement.id="videoHolder"
     tempVideoElement.controls = true;
     tempVideoElement.style = "width:800px;height:600px;"
-    centerModule2.insertBefore(tempVideoElement, centerModule2.firstChild)
+    // <div id="markdownHolder" class = "centerBody" style="overflow-y: hidden"></div> 
+    tempTextElement.id="markdownHolder"
+    tempTextElement.classList.add("centerBody");
+    tempTextElement.style = "overflow-y: hidden"
+    centerModule2.appendChild(tempVideoElement)
+    centerModule2.appendChild(tempTextElement)
+
     let courseTitle = atob(urlArray[1]);
     let articleTitle = atob(urlArray[3]);
     console.log("BOTH")
@@ -69,7 +76,7 @@ if(urlArray[0] === 'course' && urlArray[2] === 'read'){
                                             if (blob.type === "text/plain") {
                                                 // WILL USE FOR LOADING TEXT AND MP4 ONTO PAGE
                                                 blob.text().then((givemetheshit)=>{
-                                                    document.getElementById("temptextplacehere").innerHTML += marked.parse(givemetheshit) + "\n\n";
+                                                    document.getElementById("markdownHolder").innerHTML += marked.parse(givemetheshit) + "\n\n";
                                                 })
                                             }
                                             else if (blob.type.indexOf("video/")==0) {
