@@ -105,6 +105,10 @@ if(urlArray[0] === 'course' && urlArray[2] === 'read'){
         });
 }
 else if(urlArray[0] === 'course'){
+    let centerModule2 = document.getElementById("centerModule2");
+    let tempTitleElement = document.createElement('h1')
+    tempTitleElement.id="titleHolder"
+    centerModule2.insertBefore(tempTitleElement, centerModule2.firstChild)
     let courseTitle = atob(urlArray[1]);
     console.log(courseTitle)
     let listRef = sRef(storage, "courses/" + courseTitle)

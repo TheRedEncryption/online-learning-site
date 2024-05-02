@@ -424,3 +424,11 @@ h1.sectionHeader {
 code{
     font-family: 'Courier New', Courier, monospace;
 }
+
+.lineItems{
+    display: flex;
+    align-items: center;
+}
+.lineItems *{
+    margin-right: 1em;
+}
