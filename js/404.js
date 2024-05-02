@@ -46,6 +46,7 @@ if(urlArray[0] === 'course' && urlArray[2] === 'read'){
             console.log(coursesReference)
             // console.log(coursesReference.items)
             // console.log(coursesReference.prefixes)
+            let hasVideo = false;
             coursesReference.prefixes.forEach((folderRef) => {
                 listAll(folderRef).then((userIDS)=>{
                     console.log("userIDS")
@@ -55,7 +56,6 @@ if(urlArray[0] === 'course' && urlArray[2] === 'read'){
                             listAll(articleRef).then((articleParts)=>{
                                 console.log("articleParts")
                                 console.log(articleParts)
-                                let hasVideo = false;
                                 articleParts.items.forEach((file) => {
                                     console.log(file)
                                     getDownloadURL(file)
@@ -93,15 +93,15 @@ if(urlArray[0] === 'course' && urlArray[2] === 'read'){
                                             // Handle any errors
                                         });
                                 });
-                                if(!hasVideo){
-                                    document.getElementById("videoHolder").remove();
-                                }
                                 // document.body.innerHTML += articleModuleBuilder.buildCourse(articleRef.name, articleRef.parent.name);
                             })
                         }
                     });
                 })
             });
+            if(!hasVideo){
+                document.getElementById("videoHolder").remove();
+            }
         }).catch((error) => {
             // Uh-oh, an error occurred!
             console.error(error)
