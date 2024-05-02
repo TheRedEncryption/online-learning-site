@@ -32,7 +32,7 @@ if(urlArray[0] === 'course' && urlArray[2] === 'read'){
     //        <video id="tempvideoplacehere" controls style="width:800px;height:600px;"></video>
     tempVideoElement.id="videoHolder"
     tempVideoElement.controls = true;
-    tempVideoElement.style = "width:1px;height:1px;"
+    tempVideoElement.style = "width:800px;height:600px;"
     centerModule2.insertBefore(tempVideoElement, centerModule2.firstChild)
     let courseTitle = atob(urlArray[1]);
     let articleTitle = atob(urlArray[3]);
@@ -66,7 +66,7 @@ if(urlArray[0] === 'course' && urlArray[2] === 'read'){
                                             // This can be downloaded directly:
                                             const xhr = new XMLHttpRequest();
                                             xhr.responseType = 'blob';
-                                            xhr.addEventListener("load", (event) => {
+                                            xhr.onload = (event) => {
                                                 const blob = xhr.response;
                                                 if (blob.type === "text/plain") {
                                                     // WILL USE FOR LOADING TEXT AND MP4 ONTO PAGE
@@ -76,15 +76,9 @@ if(urlArray[0] === 'course' && urlArray[2] === 'read'){
                                                 }
                                                 else if (blob.type.indexOf("video/")==0) {
                                                     // WILL USE FOR LOADING TEXT AND MP4 ONTO PAGE
-                                                    hasVideo = true;
-                                                    tempVideoElement.style = "width:800px;height:600px;"
-                                                    display(blob, tempVideoElement)
+                                                    display(blob, document.getElementById("videoHolder"))
                                                 }
-                                            }).then(()=>{
-                                                if(!hasVideo){
-                                                    document.getElementById("videoHolder").remove();
-                                                }
-                                            })
+                                            }
                                             xhr.open('GET', url);
                                             xhr.send();
     
