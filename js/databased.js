@@ -67,13 +67,13 @@ window.addEventListener("load", () => {
     textingInput.addEventListener("focusout", () => {
         textingInput.setAttribute("placeholder", "");
     })
-    textingInput.addEventListener("keydown",(e)=>{
-        if(e.key=== 'Shift'){
+    textingInput.addEventListener("keydown", (e) => {
+        if (e.key === 'Shift') {
             shifting = true
         }
     })
     textingInput.addEventListener("keyup", (e) => {
-        if(e.key=== 'Shift'){
+        if (e.key === 'Shift') {
             shifting = false;
         }
         if (e.key === 'Enter' && !shifting) {
@@ -106,7 +106,7 @@ window.addEventListener("load", () => {
             }
             textingInput.value = ""
         }
-        else if (e.key==='Enter' && shifting){
+        else if (e.key === 'Enter' && shifting) {
             console.log('NEW LINE ' + shifting)
             textingInput.value = textingInput.value + "\n"
         }
@@ -175,7 +175,7 @@ window.addEventListener("load", () => {
             else {
                 centerBody.innerHTML += `<div>
                     <div class="messageHeader">
-                        <img width="${pfpWidth}" class="circleBorder" src="${currentMessage.value.profile_picture}"></img>
+                        <img width="${pfpWidth}" class="circleBorder profilePicture" src="${currentMessage.value.profile_picture}"></img>
                         &nbsp
                         <b>${currentMessage.value.username}</b>
                     </div>
@@ -209,10 +209,14 @@ window.addEventListener("load", () => {
                 remove(tempRef)
             })
         }
-        centerBody.scroll({
-            top: 1000000000,
-            behavior: "smooth",
-        });
+        document.getElementsByClassName("profilePicture")[0].onload = ()=>{
+            centerBody.scrollTo({
+                top: centerBody.scrollHeight,
+                left: 0,
+                behavior: "smooth",
+            });
+        }
+        
     });
 })
 
