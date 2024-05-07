@@ -326,6 +326,7 @@ h1.sectionHeader {
     overflow-y: scroll;
 }
 
+
 #user-profile-image {
     width: 48px;
     height: 48px;
@@ -399,6 +400,17 @@ h1.sectionHeader {
 
 .theMessageItself{
     overflow-wrap: anywhere;
+}
+
+.theMessageItself p:has(> img){
+    display: flex;
+    align-items: center;
+    /* justify-content: center; */
+    flex-direction: column;
+}
+
+.theMessageItself p:has(> img) img{
+    max-width:14em;
 }
 
 .fullWidth{
