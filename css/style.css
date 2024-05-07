@@ -245,20 +245,20 @@ h1.sectionHeader {
 
 @keyframes authHover {
     0% {
-        transform: translateY(-0.5em) skewX(-2deg);
+        transform: translateX(-0.5em);
     }
 
     50% {
-        transform: translateY(0.5em) skewX(2deg);
+        transform: translateX(0.5em);
     }
 
     100% {
-        transform: translateY(-0.5em) skewX(-2deg);
+        transform: translateX(-0.5em);
     }
 }
 
 .authHolder {
-    animation: 3s ease-in 0s infinite reverse forwards running authHover;
+    /* animation: 3s ease-in-out 0s infinite reverse forwards running authHover; */
     align-content: center;
     padding: 1em;
 }
@@ -268,6 +268,11 @@ h1.sectionHeader {
     padding: 15px;
     border-radius: 2em;
     border: solid gray 4px;
+    transform: scale(1);
+    transition: transform;
+}
+.authTextArea:focus{
+    transform: scale(1.01);
 }
 
 .authTextArea:focus {
