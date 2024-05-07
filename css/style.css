@@ -321,6 +321,10 @@ h1.sectionHeader {
     overflow-y: scroll;
 }
 
+.centerBody img {
+    width: 100%;
+}
+
 #user-profile-image {
     width: 48px;
     height: 48px;
