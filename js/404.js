@@ -33,7 +33,7 @@ if(urlArray[0] === 'course' && urlArray[2] === 'read'){
     tempVideoElement.id="videoHolder"
     tempVideoElement.controls = true;
     tempVideoElement.style = "width:800px;height:600px;"
-    tempVideoElement.hidden = true;
+    tempVideoElement.style.backgroundColor = "rgb(255,255,255)";
     centerModule2.insertBefore(tempVideoElement, centerModule2.firstChild)
     let courseTitle = atob(urlArray[1]);
     let articleTitle = atob(urlArray[3]);
@@ -77,7 +77,7 @@ if(urlArray[0] === 'course' && urlArray[2] === 'read'){
                                                 else if (blob.type.indexOf("video/")==0) {
                                                     // WILL USE FOR LOADING TEXT AND MP4 ONTO PAGE
                                                     display(blob, document.getElementById("videoHolder"))
-                                                    tempVideoElement.hidden = false;
+                                                    // tempVideoElement.hidden = false;
                                                 }
                                             }
                                             xhr.open('GET', url);
