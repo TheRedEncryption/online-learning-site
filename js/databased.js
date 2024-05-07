@@ -16,7 +16,8 @@ const extraBadWords = ["skibidi", "gyatt", "kill yourself", "cameraman", "helldi
 const emoteLinks = [
     "kitty.png",
     "yippee.jpg",
-    "yippee_bounce.gif"
+    "yippee_bounce.gif",
+    "kbity.jpg"
 ]
 const emoteNames = [];
 emoteLinks.forEach((element) => {
