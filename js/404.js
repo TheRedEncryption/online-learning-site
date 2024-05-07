@@ -111,6 +111,7 @@ else if(urlArray[0] === 'course'){
     centerModule2.insertBefore(tempTitleElement, centerModule2.firstChild)
     let courseTitle = atob(urlArray[1]);
     console.log(courseTitle)
+    tempTitleElement.innerText = courseTitle;
     let listRef = sRef(storage, "courses/" + courseTitle)
     console.log(listRef)
     listAll(listRef)
