@@ -28,13 +28,16 @@ let urlArray = urlString.split("/")
 console.log(urlArray)
 if(urlArray[0] === 'course' && urlArray[2] === 'read'){
     let centerModule2 = document.getElementById("centerModule2");
+    let tempDivElement = document.createElement('div')
     let tempVideoElement = document.createElement('video')
     //        <video id="tempvideoplacehere" controls style="width:800px;height:600px;"></video>
     tempVideoElement.id="videoHolder"
     tempVideoElement.controls = true;
     tempVideoElement.style = "width:800px;height:600px;"
-    tempVideoElement.style.backgroundColor = "rgb(255,255,255)";
-    centerModule2.insertBefore(tempVideoElement, centerModule2.firstChild)
+    tempDivElement.style = "width:800px;height:600px;background-color:rgb(255,205,205)"
+    tempVideoElement.hidden = true;
+    tempDivElement.appendChild(tempVideoElement);
+    centerModule2.insertBefore(tempDivElement, centerModule2.firstChild)
     let courseTitle = atob(urlArray[1]);
     let articleTitle = atob(urlArray[3]);
     console.log("BOTH")
@@ -77,7 +80,7 @@ if(urlArray[0] === 'course' && urlArray[2] === 'read'){
                                                 else if (blob.type.indexOf("video/")==0) {
                                                     // WILL USE FOR LOADING TEXT AND MP4 ONTO PAGE
                                                     display(blob, document.getElementById("videoHolder"))
-                                                    // tempVideoElement.hidden = false;
+                                                    tempVideoElement.hidden = false;
                                                 }
                                             }
                                             xhr.open('GET', url);
