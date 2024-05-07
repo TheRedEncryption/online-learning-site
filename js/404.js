@@ -34,7 +34,7 @@ if(urlArray[0] === 'course' && urlArray[2] === 'read'){
     tempVideoElement.id="videoHolder"
     tempVideoElement.controls = true;
     tempVideoElement.style = "width:800px;height:600px;"
-    tempDivElement.style = "width:800px;height:600px;background-color:rgb(255,205,205)"
+    // tempDivElement.style = "width:800px;height:600px;background-color:rgb(255,205,205)"
     tempVideoElement.hidden = true;
     tempDivElement.appendChild(tempVideoElement);
     centerModule2.insertBefore(tempDivElement, centerModule2.firstChild)
