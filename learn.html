@@ -30,7 +30,7 @@
 
 </head>
 
-<body class = "grainy">
+<body class="grainy">
     <!-- header goes here -->
     <header-template></header-template><br><br>
     <!-- make this a button lmao i just wanted to test it -->
@@ -38,14 +38,16 @@
     <p id="temptextplacehere"></p>
     <section>
         <div class="lineItems">
-            <h1 class = "sectionHeader">
+            <h1 class="sectionHeader">
                 <!-- Your Courses -->
                 All Courses
             </h1>
             <a href="create.html"><button>➕</button></a>
+            <input list="coursesData" name="searchBar" id="searchBar" placeholder="Search..." />
+            <datalist id="coursesData"></datalist>
         </div>
-        <div class = "course-holder-holder" id = "course-holder-main">
-            
+        <div class="course-holder-holder" id="course-holder-main">
+
         </div>
     </section>
     <!-- <section>
@@ -79,4 +81,5 @@
         </div>
     </section> -->
 </body>
+
 </html>

@@ -51,6 +51,9 @@ async function initialCall() {
                 // please explain what this "if holder else if courses data list" is supposed to mean
                 listAll(folderRef).then((res2)=>{
                     if(holder){
+                        let searchOption = document.createElement("option")
+                        searchOption.value = folderRef.name;
+                        document.getElementById("coursesData").appendChild(searchOption);
                         holder.innerHTML += courseModuleBuilder.buildCourse(folderRef.name, res2.prefixes[0].name);
                     }
                     else if (coursesDataList){
