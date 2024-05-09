@@ -35,6 +35,12 @@ window.addEventListener("load", initialCall());
 async function initialCall() {
 
     // Create a reference with an initial file path and name
+    let searchBar = document.getElementById("searchBar")
+    searchBar.addEventListener("keypress",(e)=>{
+        if(e.key==="Enter"){
+            window.location.href = window.location.href.substring(0,window.location.href.indexOf('/learn.html')) + "/course/" + btoa(searchBar.value)
+        }
+    })
     const storage = getStorage();
     const listRef = sRef(storage, 'courses');
 
