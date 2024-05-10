@@ -1,6 +1,9 @@
 import { getAuth, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/10.8.1/firebase-auth.js";
 import { getDatabase, ref, set, onValue, remove } from "https://www.gstatic.com/firebasejs/10.8.1/firebase-database.js";
 import { marked } from "https://cdn.jsdelivr.net/npm/marked/lib/marked.esm.js";
+import "https://cdn.jsdelivr.net/npm/confetti-js";
+
+// import ConfettiGenerator from "https://cdn.jsdelivr.net/npm/confetti-js/dist/index.min.js";
 
 const parser = new DOMParser();
 const auth = getAuth();
@@ -78,34 +81,41 @@ window.addEventListener("load", () => {
             shifting = false;
         }
         if (e.key === 'Enter' && !shifting) {
-            if (!(textingInput.value.trim() == "")) {
-                if (textingInput.value.length > 1000) {
-                    textingInput.classList.add("redshake")
-                    setTimeout(() => {
-                        textingInput.classList.remove("redshake")
-                    }, 1000);
-                    return console.error("Too long")
-                }
-                textingInput.value = textingInput.value.replaceAll("<", "");
-                let temp = textingInput.value.match(/https?:\/\/(www\.)?[-a-zA-Z0-9@:%._\+~#=]{1,256}\.[a-zA-Z0-9()]{1,6}\b([-a-zA-Z0-9()@:%_\+,.~#?&//=]*)/);
-                textingInput.value = DOMPurify.sanitize(profanityCleaner.clean(textingInput.value, { keepFirstAndLastChar: true, customBadWords: extraBadWords }))
-                let emotes = textingInput.value.match(/:.+?:/g)
-                if (emotes) {
-                    // console.log(emotes)
-                    for (var i = 0; i < emotes.length; i++) {
-                        let emoteURL = emoteLinks.find((element) => element.includes(emotes[i].replaceAll(":", "")))
-                        if (emoteURL) {
-                            emotes[i] = `<img src="/online-learning-site/emotes/${emoteURL}" width="${pfpWidth}"></img>`
-                            // console.log(emotes[i])
-                            textingInput.value = textingInput.value.replace(/:.+?:/, emotes[i])
-                            // console.log(currentMessage.value.message)
-                        }
+            textingInput.value = textingInput.value.trim();
+            
+            // Check if message starts with /confetti
+            if (textingInput.value.startsWith("/confetti")) {
+                generateConfetti(); // Call confetti function
+                textingInput.value = textingInput.value.replace(/^\/confetti/, ""); // Remove /confetti from start of message
+            }
+            textingInput.value = textingInput.value.replaceAll("<", "");
+
+            if (textingInput.value.length > 1000 || textingInput.value.length < 1) {
+                textingInput.classList.add("redshake")
+                setTimeout(() => {
+                    textingInput.classList.remove("redshake")
+                }, 1000);
+                return console.error("Either too long or empty")
+            }
+
+            let temp = textingInput.value.match(/https?:\/\/(www\.)?[-a-zA-Z0-9@:%._\+~#=]{1,256}\.[a-zA-Z0-9()]{1,6}\b([-a-zA-Z0-9()@:%_\+,.~#?&//=]*)/);
+            textingInput.value = DOMPurify.sanitize(profanityCleaner.clean(textingInput.value, { keepFirstAndLastChar: true, customBadWords: extraBadWords }))
+            let emotes = textingInput.value.match(/:.+?:/g)
+            if (emotes) {
+                // console.log(emotes)
+                for (var i = 0; i < emotes.length; i++) {
+                    let emoteURL = emoteLinks.find((element) => element.includes(emotes[i].replaceAll(":", "")))
+                    if (emoteURL) {
+                        emotes[i] = `<img src="/online-learning-site/emotes/${emoteURL}" width="${pfpWidth}"></img>`
+                        // console.log(emotes[i])
+                        textingInput.value = textingInput.value.replace(/:.+?:/, emotes[i])
+                        // console.log(currentMessage.value.message)
                     }
                 }
-                textingInput.value = marked.parse(textingInput.value);
-                writeUserData(uid, username, textingInput.value, profile_picture)
             }
-            textingInput.value = ""
+            textingInput.value = marked.parse(textingInput.value);
+            writeUserData(uid, username, textingInput.value, profile_picture)
+            textingInput.value = "" // Clear input after sending message
         }
         else if (e.key === 'Enter' && shifting) {
             console.log('NEW LINE ' + shifting)
@@ -220,6 +230,35 @@ window.addEventListener("load", () => {
         
     });
 })
+
+
+// Confetti function
+function generateConfetti() {
+    // Create a container for the confetti
+    var confettiContainer = document.createElement("div");
+    confettiContainer.classList.add("confetti-container");
+    document.body.appendChild(confettiContainer);
+
+    // Create a canvas element for the confetti particles
+    var confettiCanvas = document.createElement("canvas");
+    confettiCanvas.id = "confetti-canvas";
+    confettiCanvas.style.position = "absolute"; // Set position to fixed or absolute
+    confettiCanvas.style.top = "0";
+    confettiCanvas.style.left = "0";
+    confettiCanvas.style.pointerEvents = "none"; // Allow interaction with elements behind the canvas
+    confettiContainer.appendChild(confettiCanvas);
+
+    // Generate confetti particles inside the canvas
+    var confettiSettings = { target: 'confetti-canvas'};
+    var confetti = new ConfettiGenerator(confettiSettings);
+    confetti.render();
+
+    // Wait for the confetti animation to complete
+    setTimeout(() => {
+        confetti.clear();
+        document.body.removeChild(confettiContainer); // Remove the confetti container
+    }, 3000); // Clear confetti and container after 3 seconds
+}
 
 function prepareFrame(url) {
     var ifrm = document.createElement("iframe");
